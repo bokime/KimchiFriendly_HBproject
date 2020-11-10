@@ -1,14 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-  {% block body %}
-
-    <h1>Home Page</h1>
-    <!-- <ul>
-      <li><a href="/all_users">Test: view all users</a></li>
-    </ul> -->
-
-  {% endblock body %}
-
+  {% if current_user.is_authenticated %}
+    <h1>Hello, {{ current_user.nickname }}!</h1>
+  {% else %} <h1>Welcome</h1>
+  {% endif %}
 {% endblock content %}

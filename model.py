@@ -2,12 +2,13 @@
 
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship, foreign
-from datetime import datetime
+from datetime import datetime, date
+from flask_login import UserMixin
 
 db = SQLAlchemy()
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     """ A User Table """
 
     __tablename__ = 'users'
@@ -19,8 +20,11 @@ class User(db.Model):
     zipcode = db.Column(db.String, nullable=False)
     intro = db.Column(db.String, nullable=True)
 
-    share = db.relationship('Share', backref='users', lazy=True)
-
+    share = db.relationship('Share', backref='users', lazy=True) 
+    
+    def get_id(self):
+        return (self.user_id)
+        
     def __repr__(self):
         return f"""<User user_id={self.user_id} nickname={self.nickname} 
                 email={self.email} zipcode={self.zipcode}>"""
@@ -113,13 +117,13 @@ class Review(db.Model):
 
 ######### Connect db to app -> server.py #########
 
-def connect_to_db(flask_app, db_uri='postgresql:///kimchies', echo=True):
-    flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
-    flask_app.config['SQLALCHEMY_ECHO'] = echo
-    flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+def connect_to_db(app, db_uri='postgresql:///kimchies', echo=True):
+    app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
+    app.config['SQLALCHEMY_ECHO'] = echo
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-    db.app = flask_app
-    db.init_app(flask_app)
+    db.app = app
+    db.init_app(app)
 
     print('Connected to the db!')
 

@@ -20,7 +20,7 @@ def get_users():
     return User.query.all()    
 
 
-def get_user_by_id(user_id):
+def load_user(user_id):
     """ return a user by primary key """
 
     return User.query.get(int(user_id))
