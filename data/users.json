@@ -1,0 +1,82 @@
+[
+    {
+        "user_id": 1,
+        "nickname": "Fletcher",
+        "email": "rutrum@risusDonecegestas.co.uk",
+        "password": "VLX30UYI4WH",
+        "zipcode": "5152",
+        "intro": "quam vel sapien imperdiet ornare. In faucibus. Morbi vehicula. Pellentesque"
+    },
+    {
+        "user_id": 2,
+        "nickname": "Allistair",
+        "email": "dictum.placerat.augue@Nuncsollicitudin.net",
+        "password": "RDZ32BJT2YY",
+        "zipcode": "Z8625",
+        "intro": "odio semper cursus. Integer mollis. Integer tincidunt aliquam arcu. Aliquam"
+    },
+    {
+        "user_id": 3,
+        "nickname": "Jena",
+        "email": "fermentum.risus@leoin.edu",
+        "password": "XGI66FZF4KW",
+        "zipcode": "21602",
+        "intro": "Praesent eu nulla at sem molestie sodales. Mauris blandit enim"
+    },
+    {
+        "user_id": 4,
+        "nickname": "Ethan",
+        "email": "pretium.aliquet.metus@Nulla.net",
+        "password": "QJA65XEQ3SM",
+        "zipcode": "30928-747",
+        "intro": "non, egestas a, dui. Cras pellentesque. Sed dictum. Proin eget odio. Aliquam vulputate"
+    },
+    {
+        "user_id": 5,
+        "nickname": "Oliver",
+        "email": "tempor@urna.com",
+        "password": "LEV93LTX7SN",
+        "zipcode": "3564",
+        "intro": "tellus. Phasellus elit pede, malesuada vel, venenatis vel, faucibus id, libero. Donec consectetuer mauris id sapien."
+    },
+    {
+        "user_id": 6,
+        "nickname": "Brielle",
+        "email": "purus@metusAliquamerat.co.uk",
+        "password": "RFZ96WDC6QY",
+        "zipcode": "06063",
+        "intro": "sit amet luctus vulputate, nisi sem semper erat, in consectetuer ipsum nunc id"
+    },
+    {
+        "user_id": 7,
+        "nickname": "Dillon",
+        "email": "non.hendrerit.id@nisl.org",
+        "password": "IAI85KFF6JC",
+        "zipcode": "J1 6UP",
+        "intro": "sollicitudin adipiscing ligula. Aenean gravida nunc sed pede. Cum sociis natoque penatibus et magnis dis parturient"
+    },
+    {
+        "user_id": 8,
+        "nickname": "Hunter",
+        "email": "ut@nisi.co.uk",
+        "password": "HHQ59AMA6OP",
+        "zipcode": "67077",
+        "intro": "mollis dui, in sodales elit erat vitae risus. Duis a"
+    },
+    {
+        "user_id": 9,
+        "nickname": "Fritz",
+        "email": "nec@massarutrummagna.co.uk",
+        "password": "CFY54SHB9PV",
+        "zipcode": "490730",
+        "intro": "Aenean sed pede nec ante blandit viverra. Donec tempus, lorem fringilla ornare placerat, orci lacus vestibulum lorem, sit"
+    },
+    {
+        "user_id": 10,
+        "nickname": "Signe",
+        "email": "Pellentesque.habitant.morbi@Crasconvallisconvallis.org",
+        "password": "AGT71FZO6XH",
+        "zipcode": "40317",
+        "intro": "sem ut dolor dapibus gravida. Aliquam tincidunt, nunc ac mattis ornare, lectus ante dictum mi, ac mattis velit"
+    }
+]

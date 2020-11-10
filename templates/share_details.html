@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ share.share_name }} - Details{% endblock %}
+
+{% block body %}
+    <h1>{{ share.share_name }}</h1>
+    
+    <p>
+        {{ share.made_date }}
+    </p>
+    <p>
+        {{ share.descripttion }}
+    </p>
+
+{% endblock %}
