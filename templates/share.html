@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <article>
+        <div>
+            <h2><a href="#">{{ share.share_name }}</a></h2>
+            <div>
+                <a>{{ share.user.nickname }}</a>
+                <small >{{ share.made_date.strftime('%m-%d-%y') }}</small>
+            </div>
+            <p>{{ share.description }}</p>
+        </div>
+    </article>
+{% endblock content %}

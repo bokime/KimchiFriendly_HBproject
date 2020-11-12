@@ -54,6 +54,17 @@ def get_share_by_id(share_id):
 
     return Share.query.get(share_id)
 
+def get_share_by_share_name(share_name):
+    """ return a share by primary key """
+
+    return Share.query.get(share_name)    
+
+
+def get_shares_by_zipcode(zipcode):
+    """ query user zipcode from User obj for Share (Left Join) """ 
+
+    return db.session.query(Share).join(User).filter(User.zipcode == zipcode).all() 
+
 
 # def create_recipe(recipe_title, recipe_date, description, photo):
 #     """ create and return a new recipe """
@@ -64,7 +75,6 @@ def get_share_by_id(share_id):
 #     db.session.commit()
 
 #     return recipe
-
 
 
 # def create_review(user, share, score):

@@ -2,8 +2,9 @@
 
 {% block content %}
     <h1>Sign In</h1>
-    <form method="POST" action="" novalidate>
+    <form method="POST" action="">
         {{ form.hidden_tag() }}
+        <fieldset>
             <div>
                 {{ form.email.label }}<br>
                 <!-- validation errors -->
@@ -32,16 +33,17 @@
                     {{ form.password }}
                 {% endif %}
             </div>
+        </fieldset>
             <div>
                 {{ form.remember }}
                 {{ form.remember.label }}
             </div>
-        <div>
-            {{ form.submit() }}
-        </div>
-        <!-- <small>
-            <a href="#">Forgot Password?</a>
-        </small> -->
+            <div>
+                {{ form.submit() }}
+            </div>
+            <!-- <small>
+                <a href="#">Forgot Password?</a>
+            </small> -->
     </form>
     <div>
         <small>

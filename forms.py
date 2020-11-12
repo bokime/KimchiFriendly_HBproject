@@ -1,7 +1,9 @@
 from flask_wtf import FlaskForm
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, TextAreaField, DateField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from model import User, Share, Review
+
 
 
 class Registration(FlaskForm):
@@ -33,4 +35,52 @@ class Login(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember Me')
-    submit = SubmitField('Log In')    
+    submit = SubmitField('Log In')  
+
+
+class UpdateAccount(FlaskForm):
+    """ update account form """
+
+    nickname = StringField('Nickname', validators=[DataRequired(), Length(min=2, max=20)])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=5, max=10)]) 
+    submit = SubmitField('Update')
+
+    def validate_nickname(self, nickname):
+        if nickname.data != current_user.nickname:
+            user = User.query.filter_by(nickname=nickname.data).first()
+            if user:
+                raise ValidationError('This nickname exist.')
+
+    def validate_email(self, email):
+        if email.data != current_user.email:
+            user = User.query.filter_by(email=email.data).first()
+            if user:
+                raise ValidationError('This email exist.')
+
+
+class NewShare(FlaskForm):
+    """ new jar share form """
+
+    share_name = StringField('Share Name', validators=[DataRequired()])
+    made_date = DateField('Made Date', format='%m/%d/%Y')
+    description = StringField('Description', validators=[DataRequired()])
+    submit = SubmitField('New Share')
+
+
+class ZipSearch(FlaskForm):
+    """ zipcode search form for Share """
+
+    zipcode = StringField('zipcode')
+    submit = SubmitField('Search')
+
+
+# class JarStatus(FlaskForm):
+#     """ jar share status form """
+
+#     choices = [('on market', 'on market'),
+#                 ('fermanting', 'fermanting'),
+#                 ('sold', 'sold')]
+
+#     select = SelectField('Jar Status: ', choices=choices)
+

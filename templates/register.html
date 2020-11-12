@@ -3,6 +3,7 @@
     <h1>Register</h1>
     <form method="POST" action="">
         {{ form.hidden_tag() }}
+        <fieldset>
             <div>
                 {{ form.nickname.label }}
                 <!-- validation errors  -->
@@ -77,6 +78,7 @@
                     {{ form.zipcode }}
                 {% endif %}
             </div>
+        </fieldset>
         <div>
             {{ form.submit() }}
         </div>
