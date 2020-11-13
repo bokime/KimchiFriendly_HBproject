@@ -22,8 +22,9 @@ class User(UserMixin, db.Model):
 
     share = db.relationship('Share', backref='users', lazy=True) 
     
-    # def get_id(self):
-    #     return (self.user_id)
+    """oderride the default properties of get_id()"""
+    def get_id(self):
+        return (self.user_id)
         
     def __repr__(self):
         return f"""<User user_id={self.user_id} nickname={self.nickname} 
@@ -39,7 +40,7 @@ class Share(db.Model):
     share_name = db.Column(db.String(120), nullable=False)
     made_date = db.Column(db.Date, nullable=False) #'mm-dd-yy'
     description = db.Column(db.String, nullable=False)
-    jar_status = db.Column(db.String(20), nullable=False)
+    jar_status = db.Column(db.String(20), nullable=True)
     # img = db.Column(db.String(20), nullable=True, default='default.jpg')
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)

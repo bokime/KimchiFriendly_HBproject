@@ -73,6 +73,15 @@ def get_shares_by_nickname(nickname):
     return db.session.query(Share).join(User).filter(User.nickname == nickname).all()     
 
 
+
+
+
+
+
+
+
+
+
 # def create_recipe(recipe_title, recipe_date, description, photo):
 #     """ create and return a new recipe """
 

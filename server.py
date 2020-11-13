@@ -2,7 +2,7 @@
 import os
 from flask import Flask, render_template, redirect, request, flash, session, url_for, jsonify
 from model import connect_to_db
-from forms import Registration, Login, UpdateAccount, NewShare, ZipSearch
+from forms import Registration, Login, UpdateAccount, NewShare
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 # from werkzeug.security import generate_password_hash, check_password_hash
@@ -64,10 +64,10 @@ def register():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    """ let user login"""
+    """ user login verification """
     
     if current_user.is_authenticated:
-        # flash(f"Let's make and share some Kimchi { current_user.nickname }!", "success")
+        flash(f"Let's make and share some Kimchi Jars, { current_user.nickname }!", "success")
         return redirect(url_for('home'))
 
     form = Login()
@@ -76,6 +76,7 @@ def login():
 
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
+            session['user_id']= user.user_id
             return redirect(url_for("home"))
         else:
             flash("Invalid username or password", "danger")
@@ -113,17 +114,15 @@ def account():
     return render_template('account.html', title='Account', form=form)
 
 
-######################################## ALL SHARE JARS(potential /home)
+###### ALL SHARE JARS(potential /home)
 @app.route('/share_jars')
 def share_jars():
     """ Home page showing posted jar shares """
     shares = crud.get_shares()
-    form = ZipSearch()
 
-    return render_template('share_jars.html', shares=shares, form=form, title='Welcome')    
+    return render_template('share_jars.html', shares=shares, title='Welcome')    
 
 
-######################################## CREATING NEW JAR SHARE
 @app.route('/share_jars/new', methods=['GET', 'POST'])
 @login_required
 def new_share():
@@ -132,7 +131,7 @@ def new_share():
     form = NewShare()
 
     if form.validate_on_submit():
-        new_share = Share(share_name=form.share_name.data, made_date=form.made_date.data, description=form.description.data, jar_status=form.jar_status.data)
+        new_share = Share(share_name=form.share_name.data, made_date=form.made_date.data, description=form.description.data, user_id=session['user_id'])
 
         db.session.add(new_share)
         db.session.commit()
@@ -143,141 +142,68 @@ def new_share():
     return render_template('new_share.html', title='New Jar Share', form=form, legend='New Share')
 
 
-@app.route('/share_jars/<int:share_id>')
-@login_required
+@app.route('/share_jars/<share_id>')
 def share(share_id):
+    """ show the detail of each Kimchi Jar Share """
+
     share = Share.query.get_or_404(share_id)
     return render_template('share.html', title=share.share_name, share=share)
 
 
-@app.route('/share_jars/<string:zipcode>')
+############# error: AttributeError: 'function' object has no attribute 'share_name'
+############# To Kat, I'm in the middle of working on this.
+
+# @app.route('/share_jars/<share_id>/update', methods=['GET', 'POST'])
+# @login_required
+# def update_share(share_id):
+#     """ update new share """
+#     update_share = Share.query.get_or_404(share_id)
+
+#     if update_share.user_id != current_user.user_id:
+#         flash('Are you sure this is your Kimchi share? (permission denided)')
+#         return redirect(url_for('home'))
+    
+#     form = NewShare()
+#     if request.method == "POST":
+#         share.share_name = form.share_name.data
+#         share.made_date = form.made_date.data
+#         share.description = form.description.data
+        
+#         db.session.commit()
+
+#         flash('Your new jar share has been updated!', 'success')
+#         return redirect(url_for('share_jars', user_id=current_user.user_id))
+    
+#     elif request.method == "GET":
+#         form.share_name.data = share.share_name
+#         form.made_date.data = share.made_date
+#         form.description.data = share.description
+    
+#     return render_template('new_share.html', title='Update Jar Share', form=form, legend='Update Jar Share')
+
+
+@app.route('/user/<nickname>')
+# @login_required
+def user_shares(nickname):
+    """ show the user's kimchi share history """
+
+    user = User.query.filter_by(nickname=nickname).first_or_404()
+    shares = crud.get_shares_by_nickname(nickname)
+    return render_template('user_shares.html', shares=shares, user=user)   
+
+
+#################################### zipcode, WIP, not working  yet.
+@app.route('/share_jars/<zipcode>')
 @login_required
 def share_zipcode(zipcode): 
     """ show Kimchi shares in the user's input zipcode """
 
-    form=ZipSearch()
-    
-    return render_template('share_jars.html')
-
-
-@app.route('/user/<string:nickname>')
-@login_required
-def user_shares(nickname):
-    """ show the user's kimchi share history """
-    user = User.query.filter_by(nickname=nickname).first_or_404()
-    shares = crud.get_shares_by_nickname(nickname)
-    return render_template('user_shares.html', shares=shares, user=user)    
-
-
-# @app.route('/share_jars/<int:share_id>/update', methods=['GET', 'POST'])
-# @login_required
-# def update_share(share_id):
-#     return render_template('new_share.html', title='Update Jar Share', form=form, legend='Update Share')
+    zipcode = request.form.get('zipcode')
+    shares = crud.get_shares_by_zipcode(zipcode)
+    return render_template('share_zipcode.html', shares=shares)
 
 
 
-
-
-
-
-
-
-
-
-# @app.route('/', methods=['POST'])
-# def index():
-#     search = Zipcode_Search()
-
-#     if request.method == 'POST':
-#         return search_results(search)
-#     return render_template('jar_shares.html', form=search)
-
-# get_shares_by_zipcode(zipcode)
-# @app.route('/share_jars/<zipcode>', methods=['POST'])
-# def search_results(search):
-
-#     form=Zipcode_Search()
-
-#     results = []
-#     search_string = search.data['search']
-
-#     if search_string == '':
-#         shares_zipcode = db.session.query(Share.user_id.zipcode)
-#         results = shares_zipcode.all()
-#     if not results:
-#         flash('No results found!')
-#         return redirect('/')
-#     else:
-#         # display results
-#         return render_template('jar_shares.html', results=results)      
-
-
-
-################################ test:displays all users and all shares 
-
-# @app.route('/all_users')
-# def all_users():
-#     """View all users."""
-
-#     users = crud.get_users()
-
-#     return render_template('all_users.html', users=users, title='All Users')
-
-
-# @app.route('/users', methods=['POST'])
-# def register_user():
-#     """Create a new user"""
-
-#     email = request.form.get('email')
-#     password = request.form.get('password')
-#     nickname = request.form.get('nickname')
-#     zipcode = request.form.get('zipcode')
-
-#     user = crud.get_user_by_email(email)
-
-#     if user:
-#         flash('Cannot create an account with that email. Try again.')
-#     else:
-#         crud.create_user(email, password, nickname, zipcode)
-#         flash('Account created! Please log in.')
-
-#     return redirect('/')    
-
-
-# @app.route('/shares')
-# def all_shares():
-#     """ view all shares """
-
-#     shares = crud.get_shares()
-
-#     return render_template('all_shares.html', shares=shares)
-
-
-# @app.route('/shares/<share_id>')
-# def show_share(share_id):
-#     """Show details on a particular jar share."""
-
-#     user = crud.get_share_by_id(share_id)
-
-#     return render_template('share_details.html', share=share)
-
-# @app.route('/login', methods=['GET', 'POST'])
-# def login():
-#     """ user login"""
-#     form = Login()
-
-#     if form.validate_on_submit():
-#         user = User.query
-#         if form.email.data == 'admin@blog.com' and form.password.data == 'password':
-#             flash('You have been logged in!', 'success')
-#             return redirect(url_for('home'))
-#         else:
-#             flash('Login Unsuccessful. Please check username and password', 'danger')
-
-#     return render_template('login.html', title='Login', form=form) 
-    
-
-#######################################################
 
 if __name__ == '__main__':
     connect_to_db(app)

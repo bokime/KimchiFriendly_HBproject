@@ -3,7 +3,7 @@
     <form method="POST" action="">
         {{ form.hidden_tag() }}
         <fieldset>
-            <legend> New Kimchi Jar Share </legend>
+            <legend> {{ legend }} </legend>
             <div>
                 {{ form.share_name.label }}<br>
                 <!-- validation errors -->
@@ -49,7 +49,7 @@
                 {% endif %}
             </div>
             <br>
-            <div>
+            <!-- <div>
                 {{ form.jar_status.label }}<br>
 
                 {% if form.jar_status.errors %}
@@ -62,7 +62,7 @@
                 {% else %}
                     {{ form.jar_status }}
                 {% endif %}
-            </div>
+            </div> -->
         </fieldset>
         <br>
         <div>

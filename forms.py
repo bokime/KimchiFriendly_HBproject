@@ -64,19 +64,3 @@ class NewShare(FlaskForm):
     submit = SubmitField('New Share')
 
 
-class ZipSearch(FlaskForm):
-    """ zipcode search form for Share """
-
-    zipcode = StringField('zipcode')
-    submit = SubmitField('Search')
-
-
-# class JarStatus(FlaskForm):
-#     """ jar share status form """
-
-#     choices = [('on market', 'on market'),
-#                 ('fermanting', 'fermanting'),
-#                 ('sold', 'sold')]
-
-#     select = SelectField('Jar Status: ', choices=choices)
-

@@ -5,11 +5,10 @@
     <h3>All Kimchi Jars</h3>
     <br>
     {% block body %}
-        <div>
-            {{ form.zipcode.label }}
-            {{ form.zipcode }}
-            {{ form.submit() }}
-        </div>
+
+        <form action="/" method="POST">
+            <p>zipcode: <input type="text" name="zipcode"> <input type="submit"></p>
+        </form>
         <br>
         {% for share in shares %}
             <article>
@@ -24,9 +23,16 @@
             </article>
             <br>
         {% endfor %}
+        
     {% endblock body %}
 {% endblock content %}
 
 
 
-<!-- {{ url_for('user', nickname=share.user_id) }} -->
+            <!-- <a href="{{ url_for('share_zipcode', zipcode=user.zipcode) }}"></a> -->
+            <!-- <div>
+            {{ form.zipcode.label }}
+
+            <a href="{{ url_for('share_zipcode', zipcode=form.zipcode) }}">{{ form.zipcode }}</a>
+            {{ form.submit() }}
+            </div> -->
