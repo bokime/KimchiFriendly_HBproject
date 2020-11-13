@@ -50,9 +50,7 @@ for share in share_data:
     description = share['description']
     zipcode = share['zipcode']
     jar_status = share['jar_status']
-    # print('zipcode=====', zipcode)
-    user_id = share['user_id'] ####### NOT WORKING!!!
-    # print(user_id)
-    # => NameError: name 'user_id' is not defined
+    user_id = share['user_id'] 
+
 
     crud.create_share(share_name, made_date, description, jar_status, user_id)
