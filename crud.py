@@ -59,11 +59,18 @@ def get_share_by_share_name(share_name):
 
     return Share.query.get(share_name)    
 
+def get_share_by_user_id(user_id):
+    return Share.query.get(user_id)
 
 def get_shares_by_zipcode(zipcode):
     """ query user zipcode from User obj for Share (Left Join) """ 
 
     return db.session.query(Share).join(User).filter(User.zipcode == zipcode).all() 
+
+def get_shares_by_nickname(nickname):
+    """ query user nickname from User obj for Share (Left Join) """ 
+
+    return db.session.query(Share).join(User).filter(User.nickname == nickname).all()     
 
 
 # def create_recipe(recipe_title, recipe_date, description, photo):

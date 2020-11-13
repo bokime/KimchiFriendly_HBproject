@@ -42,29 +42,25 @@ class UpdateAccount(FlaskForm):
     """ update account form """
 
     nickname = StringField('Nickname', validators=[DataRequired(), Length(min=2, max=20)])
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired(), Length(min=5, max=10)]) 
+
+    password = StringField('Password')
+    zipcode = StringField('Zipcode')
     submit = SubmitField('Update')
 
     def validate_nickname(self, nickname):
         if nickname.data != current_user.nickname:
             user = User.query.filter_by(nickname=nickname.data).first()
             if user:
-                raise ValidationError('This nickname exist.')
-
-    def validate_email(self, email):
-        if email.data != current_user.email:
-            user = User.query.filter_by(email=email.data).first()
-            if user:
-                raise ValidationError('This email exist.')
+                raise ValidationError('Sorry, this nickname exist.')
 
 
 class NewShare(FlaskForm):
     """ new jar share form """
 
-    share_name = StringField('Share Name', validators=[DataRequired()])
-    made_date = DateField('Made Date', format='%m/%d/%Y')
-    description = StringField('Description', validators=[DataRequired()])
+    share_name = StringField('Title', validators=[DataRequired()])
+    made_date = DateField('When did you make?', format='%m-%d-%y')
+    description = TextAreaField('About This Kimchi: ', validators=[DataRequired()])
+    jar_status = StringField('Status')
     submit = SubmitField('New Share')
 
 

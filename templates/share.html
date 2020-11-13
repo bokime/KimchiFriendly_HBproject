@@ -3,9 +3,9 @@
 {% block content %}
     <article>
         <div>
-            <h2><a href="#">{{ share.share_name }}</a></h2>
+            <h2><a>{{ share.share_name }}</a></h2>
             <div>
-                <a>{{ share.user.nickname }}</a>
+                <a href="{{ url_for('user_shares', nickname=share.user.nickname) }}">{{ share.user.nickname }}</a>
                 <small >{{ share.made_date.strftime('%m-%d-%y') }}</small>
             </div>
             <p>{{ share.description }}</p>

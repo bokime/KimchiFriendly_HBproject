@@ -99,8 +99,7 @@ def account():
     
     if form.validate_on_submit():
         current_user.nickname = form.nickname.data
-        current_user.email = form.email.data
-        current_user.password = form.password.data
+        current_user.zipcode = form.zipcode.data
 
         db.session.commit()
 
@@ -109,15 +108,12 @@ def account():
 
     elif request.method == 'GET':
         form.nickname.data = current_user.nickname
-        form.email.data = current_user.email
-        form.password.data = current_user.password
+        form.zipcode.data = current_user.zipcode
 
     return render_template('account.html', title='Account', form=form)
 
 
-
-
-######################################## SHARE JARS
+######################################## ALL SHARE JARS(potential /home)
 @app.route('/share_jars')
 def share_jars():
     """ Home page showing posted jar shares """
@@ -127,7 +123,8 @@ def share_jars():
     return render_template('share_jars.html', shares=shares, form=form, title='Welcome')    
 
 
-@app.route('/share_jars/new_share', methods=['GET', 'POST'])
+######################################## CREATING NEW JAR SHARE
+@app.route('/share_jars/new', methods=['GET', 'POST'])
 @login_required
 def new_share():
     """ create new kimchi jar share """
@@ -135,12 +132,12 @@ def new_share():
     form = NewShare()
 
     if form.validate_on_submit():
-        new_share = Share(share_name=form.share_name.data, made_date=form.made_date.data, description=form.description.data)
+        new_share = Share(share_name=form.share_name.data, made_date=form.made_date.data, description=form.description.data, jar_status=form.jar_status.data)
 
         db.session.add(new_share)
         db.session.commit()
 
-        flash('Yay! New share has been created.', 'success')
+        flash('Yay! Your new share has been posted!', 'success')
         return redirect(url_for('share_jars'))
 
     return render_template('new_share.html', title='New Jar Share', form=form, legend='New Share')
@@ -150,25 +147,38 @@ def new_share():
 @login_required
 def share(share_id):
     share = Share.query.get_or_404(share_id)
-    # share_name = crud.get_share_by_share_name(share_id.share_name)
     return render_template('share.html', title=share.share_name, share=share)
 
 
-# @app.route('/share_jars/<int:user_id>')
-# @login_required
-# def user(user_id):
-#     # user = Share.query.get_or_404(user_id)
-#     user = crud.load_user(user_id)
-#     # share_name = crud.get_share_by_share_name(share_id.share_name)
-#     return render_template('user.html', title=user.user_nicakname, user=user)
+@app.route('/share_jars/<string:zipcode>')
+@login_required
+def share_zipcode(zipcode): 
+    """ show Kimchi shares in the user's input zipcode """
+
+    form=ZipSearch()
+    
+    return render_template('share_jars.html')
 
 
+@app.route('/user/<string:nickname>')
+@login_required
+def user_shares(nickname):
+    """ show the user's kimchi share history """
+    user = User.query.filter_by(nickname=nickname).first_or_404()
+    shares = crud.get_shares_by_nickname(nickname)
+    return render_template('user_shares.html', shares=shares, user=user)    
 
 
 # @app.route('/share_jars/<int:share_id>/update', methods=['GET', 'POST'])
 # @login_required
 # def update_share(share_id):
 #     return render_template('new_share.html', title='Update Jar Share', form=form, legend='Update Share')
+
+
+
+
+
+
 
 
 

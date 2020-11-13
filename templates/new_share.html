@@ -3,6 +3,7 @@
     <form method="POST" action="">
         {{ form.hidden_tag() }}
         <fieldset>
+            <legend> New Kimchi Jar Share </legend>
             <div>
                 {{ form.share_name.label }}<br>
                 <!-- validation errors -->
@@ -17,11 +18,12 @@
                     {{ form.share_name }}
                 {% endif %}
             </div>
+            <br>
             <div>
                 {{ form.made_date.label }}<br>
-                <!-- validation errors -->
+
                 {% if form.made_date.errors %}
-                    {{ form.made_date }}
+                    {{ form.made_date}}
                     <div>
                         {% for error in form.made_date.errors %}
                             <span style="color: red;">{{ error }}</span>
@@ -31,6 +33,7 @@
                     {{ form.made_date }}
                 {% endif %}
             </div>
+            <br>
             <div>
                 {{ form.description.label }}<br>
                 <!-- validation errors -->
@@ -45,10 +48,28 @@
                     {{ form.description }}
                 {% endif %}
             </div>
+            <br>
+            <div>
+                {{ form.jar_status.label }}<br>
+
+                {% if form.jar_status.errors %}
+                    {{ form.jar_status }}
+                    <div>
+                        {% for error in form.jar_status.errors %}
+                            <span style="color: red;">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.jar_status }}
+                {% endif %}
+            </div>
         </fieldset>
         <br>
         <div>
-            {{ form.submit() }}
+            {{ form.submit }}
         </div>
     </form>
 {% endblock content %}
+
+
+<!-- Not a valid date value ERROR!!! -->
