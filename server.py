@@ -153,33 +153,47 @@ def share(share_id):
 ############# error: AttributeError: 'function' object has no attribute 'share_name'
 ############# To Kat, I'm in the middle of working on this.
 
-# @app.route('/share_jars/<share_id>/update', methods=['GET', 'POST'])
+@app.route('/share_jars/<share_id>/update', methods=['GET', 'POST'])
+@login_required
+def update_share(share_id):
+    """ update user's share posting """
+    update_share = Share.query.get_or_404(share_id)
+
+    if update_share.user_id != current_user.user_id:
+        flash('Are you sure this is your Kimchi share? (permission denid)', 'danger')
+        return redirect(url_for('home'))
+    
+    form = NewShare()
+    if request.method == "POST":
+        update_share.share_name = form.share_name.data
+        update_share.made_date = form.made_date.data
+        update_share.description = form.description.data
+    
+        db.session.commit()
+
+        flash('Your new jar share has been updated!', 'success')
+        return redirect(url_for('share_jars', user_id=current_user.user_id))
+    
+    elif request.method == "GET":
+        form.share_name.data = update_share.share_name
+        form.made_date.data = update_share.made_date
+        form.description.data = update_share.description
+    
+    return render_template('new_share.html', title='Update Jar Share', form=form, legend='Update Jar Share')
+
+
+# @app.route('/share_jars/<share_id>/delete', methods=['POST'])
 # @login_required
-# def update_share(share_id):
-#     """ update new share """
-#     update_share = Share.query.get_or_404(share_id)
+# def delete_share(share_id):
+#     """ delete user's share posting """
+#     delete_share = Share.query.get(share_id)
 
-#     if update_share.user_id != current_user.user_id:
-#         flash('Are you sure this is your Kimchi share? (permission denided)')
+#     if delete_share.user_id != current_user.user_id:
+#         flash('Be careful! This is not your Kimchi share.', 'danger')
 #         return redirect(url_for('home'))
-    
-#     form = NewShare()
-#     if request.method == "POST":
-#         share.share_name = form.share_name.data
-#         share.made_date = form.made_date.data
-#         share.description = form.description.data
         
-#         db.session.commit()
-
-#         flash('Your new jar share has been updated!', 'success')
-#         return redirect(url_for('share_jars', user_id=current_user.user_id))
-    
-#     elif request.method == "GET":
-#         form.share_name.data = share.share_name
-#         form.made_date.data = share.made_date
-#         form.description.data = share.description
-    
-#     return render_template('new_share.html', title='Update Jar Share', form=form, legend='Update Jar Share')
+#         db.session.delete
+#     return render_template('share_jars.html')
 
 
 @app.route('/user/<nickname>')
@@ -193,13 +207,14 @@ def user_shares(nickname):
 
 
 #################################### zipcode, WIP, not working  yet.
-@app.route('/share_jars/<zipcode>')
+@app.route('/share_jars', methods=['POST'])
 @login_required
-def share_zipcode(zipcode): 
+def share_zipcode(): 
     """ show Kimchi shares in the user's input zipcode """
 
     zipcode = request.form.get('zipcode')
     shares = crud.get_shares_by_zipcode(zipcode)
+
     return render_template('share_zipcode.html', shares=shares)
 
 
