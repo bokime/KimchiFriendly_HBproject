@@ -1,14 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
     <article>
+        <br>
         <div>
-            <h2><a>{{ share.share_name }}</a></h2>
+            <h2>{{ share.share_name }}</h2>
             <div>
                 <a href="{{ url_for('user_shares', nickname=share.user.nickname) }}">{{ share.user.nickname }}</a>
-                <small >{{ share.made_date.strftime('%m-%d-%y') }}</small>
+                <p>{{ share.made_date.strftime('%m-%d-%y') }}</p>
             </div>
             <p>{{ share.description }}</p>
         </div>
     </article>
+    {% if share.user_id == current_user.user_id %}
+        <li>
+            <a href="{{ url_for('update_share', share_id=share.share_id) }}">Update</a>
+        </li> 
+        <form action="{{ url_for('delete_share', share_id=share.share_id) }}" method="POST">
+            <button type="submit">Delete</button>
+        </form>
+    {% endif %}
+
 {% endblock content %}

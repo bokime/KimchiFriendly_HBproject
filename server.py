@@ -28,6 +28,7 @@ login_manager.login_view = "login"
 @login_manager.user_loader
 def load_user(user_id):
     """login manager to check current user"""
+
     return User.query.get(int(user_id))
 
 
@@ -35,7 +36,6 @@ def load_user(user_id):
 @app.route('/home')
 def home():
     """ Home page showing posted jar shares """
-
 
     return render_template('home.html', title='Welcome')
 
@@ -86,6 +86,8 @@ def login():
 
 @app.route('/logout')
 def logout():
+    """ user logout """
+
     logout_user()
     flash("See you next time", "warning")
     return redirect(url_for('home'))   
@@ -114,10 +116,10 @@ def account():
     return render_template('account.html', title='Account', form=form)
 
 
-###### ALL SHARE JARS(potential /home)
 @app.route('/share_jars')
 def share_jars():
     """ Home page showing posted jar shares """
+
     shares = crud.get_shares()
 
     return render_template('share_jars.html', shares=shares, title='Welcome')    
@@ -130,7 +132,8 @@ def new_share():
 
     form = NewShare()
 
-    if form.validate_on_submit():
+    if request.method == "POST":
+    # if form.validate_on_submit():
         new_share = Share(share_name=form.share_name.data, made_date=form.made_date.data, description=form.description.data, user_id=session['user_id'])
 
         db.session.add(new_share)
@@ -150,9 +153,6 @@ def share(share_id):
     return render_template('share.html', title=share.share_name, share=share)
 
 
-############# error: AttributeError: 'function' object has no attribute 'share_name'
-############# To Kat, I'm in the middle of working on this.
-
 @app.route('/share_jars/<share_id>/update', methods=['GET', 'POST'])
 @login_required
 def update_share(share_id):
@@ -164,6 +164,7 @@ def update_share(share_id):
         return redirect(url_for('home'))
     
     form = NewShare()
+
     if request.method == "POST":
         update_share.share_name = form.share_name.data
         update_share.made_date = form.made_date.data
@@ -172,7 +173,7 @@ def update_share(share_id):
         db.session.commit()
 
         flash('Your new jar share has been updated!', 'success')
-        return redirect(url_for('share_jars', user_id=current_user.user_id))
+        return redirect(url_for('share_jars', share_id=update_share.share_id))
     
     elif request.method == "GET":
         form.share_name.data = update_share.share_name
@@ -182,22 +183,26 @@ def update_share(share_id):
     return render_template('new_share.html', title='Update Jar Share', form=form, legend='Update Jar Share')
 
 
-# @app.route('/share_jars/<share_id>/delete', methods=['POST'])
-# @login_required
-# def delete_share(share_id):
-#     """ delete user's share posting """
-#     delete_share = Share.query.get(share_id)
+@app.route('/share_jars/<share_id>/delete', methods=['POST'])
+@login_required
+def delete_share(share_id):
+    """ delete user's share posting """
+    delete_share = Share.query.get(share_id)
 
-#     if delete_share.user_id != current_user.user_id:
-#         flash('Be careful! This is not your Kimchi share.', 'danger')
-#         return redirect(url_for('home'))
+    if delete_share.user_id != current_user.user_id:
+        flash('Watch out! This is not your Kimchi share.', 'danger')
+        return redirect(url_for('share_jars'))
+
+    else:    
+        db.session.delete(delete_share)
+        db.session.commit()
         
-#         db.session.delete
-#     return render_template('share_jars.html')
+        flash('Your Kimchi Share Posting has been deleted.', 'sucess')
+        return redirect(url_for('share_jars'))
 
 
 @app.route('/user/<nickname>')
-# @login_required
+@login_required
 def user_shares(nickname):
     """ show the user's kimchi share history """
 
@@ -206,7 +211,6 @@ def user_shares(nickname):
     return render_template('user_shares.html', shares=shares, user=user)   
 
 
-#################################### zipcode, WIP, not working  yet.
 @app.route('/share_jars', methods=['POST'])
 @login_required
 def share_zipcode(): 
@@ -215,9 +219,7 @@ def share_zipcode():
     zipcode = request.form.get('zipcode')
     shares = crud.get_shares_by_zipcode(zipcode)
 
-    return render_template('share_zipcode.html', shares=shares)
-
-
+    return render_template('share_zipcode.html', shares=shares, zipcode=zipcode)
 
 
 if __name__ == '__main__':

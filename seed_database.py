@@ -10,12 +10,12 @@ import crud
 import model
 import server
 
-os.system('dropdb kimchies')
-os.system('createdb kimchies')
+# os.system('dropdb kimchies')
+# os.system('createdb kimchies')
 
 model.connect_to_db(server.app)#, echo=False)
 
-model.db.create_all()
+# model.db.create_all()
 
 
 """ seed dummy user data """
