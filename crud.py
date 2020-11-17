@@ -14,6 +14,42 @@ def create_user(nickname, email, password, zipcode, intro):
     return user
 ### test example: create_user('lena', 'lena@test.com', 'password', '12345', 'I like kimchi!')    
 
+
+def create_share(share_name, made_date, description, jar_status, user_id):
+    """ create a new jar share """
+
+    share = Share(share_name=share_name, made_date=made_date, description=description, jar_status=jar_status, user_id=user_id)
+
+    db.session.add(share)
+    db.session.commit()
+
+    return share
+### test example: create_share('red cabbage kimchi', '05-23-19', 'very spicy and tangy! so good!', 'sold', '2')  
+
+
+# def create_review(user, share, score):
+#     """ create and return a new review """
+
+#     review = Review(user=user, share=share, score=score)
+
+#     db.session.add(review)
+#     db.session.commit()
+
+#     return review
+
+
+
+# def create_review(rating, review_date, comment, share_id, user_id):
+    
+#     user_id = db.session.query(Share).join(User).filter(Share.user_id == user_id).all()
+#     review = Review(rating=rating, review_date=review_date, comment=comment, share_id=share_id, user_id=user_id)
+
+#     db.session.add(review)
+#     db.session.commit()
+
+#     return review
+
+
 def get_users():
     """Return all users."""
     
@@ -32,40 +68,34 @@ def get_user_by_email(email):
     return User.query.filter(User.email == email).first()
 
 
-def create_share(share_name, made_date, description, jar_status, user_id):
-    """ create a new jar share """
-
-    share = Share(share_name=share_name, made_date=made_date, description=description, jar_status=jar_status, user_id=user_id)
-
-    db.session.add(share)
-    db.session.commit()
-
-    return share
-### test example: create_share('red cabbage kimchi', '05-23-19', 'very spicy and tangy! so good!', 'sold', '2')    
-
-
 def get_shares():
     """ return all jar shares """
 
     return Share.query.all()
+
 
 def get_share_by_id(share_id):
     """ return a share by primary key """
 
     return Share.query.get(share_id)
 
+
 def get_share_by_share_name(share_name):
     """ return a share by primary key """
 
     return Share.query.get(share_name)    
 
+
 def get_share_by_user_id(user_id):
+    """ return a share by user_id """
     return Share.query.get(user_id)
+
 
 def get_shares_by_zipcode(zipcode):
     """ query user zipcode from User obj for Share (Left Join) """ 
 
     return db.session.query(Share).join(User).filter(User.zipcode == zipcode).all() 
+
 
 def get_shares_by_nickname(nickname):
     """ query user nickname from User obj for Share (Left Join) """ 

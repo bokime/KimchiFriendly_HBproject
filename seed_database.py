@@ -10,12 +10,12 @@ import crud
 import model
 import server
 
-# os.system('dropdb kimchies')
-# os.system('createdb kimchies')
+os.system('dropdb kimchies')
+os.system('createdb kimchies')
 
 model.connect_to_db(server.app)#, echo=False)
 
-# model.db.create_all()
+model.db.create_all()
 
 
 """ seed dummy user data """
@@ -54,3 +54,21 @@ for share in share_data:
 
 
     crud.create_share(share_name, made_date, description, jar_status, user_id)
+
+
+
+# """ seed dummy review data """
+
+####### user_id isn't Nullable. how do I seed user_id? #######
+
+# with open('data/reviews.json') as r:
+#     review_data = json.loads(r.read())
+
+# for review in review_data:
+
+#     rating = review['rating']
+#     review_date = datetime.strptime(review['review_date'], '%m-%d-%y')
+#     comment = review['comment']
+#     share_id = review['share_id']
+
+#     crud.create_review(rating, review_date, comment, share_id)

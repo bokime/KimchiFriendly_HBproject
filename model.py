@@ -39,9 +39,9 @@ class Share(db.Model):
     share_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     share_name = db.Column(db.String(120), nullable=False)
     made_date = db.Column(db.Date, nullable=False) #'mm-dd-yy'
-    description = db.Column(db.String, nullable=False)
+    description = db.Column(db.String, nullable=True)
     jar_status = db.Column(db.String(20), nullable=True)
-    # img = db.Column(db.String(20), nullable=True, default='default.jpg')
+    img = db.Column(db.String(20), nullable=True, default='default.jpg')
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     
@@ -58,20 +58,20 @@ class Review(db.Model):
     __tablename__ = 'reviews'
 
     review_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    score = db.Column(db.Integer, nullable=False)
-    review_date = db.Column(db.Date, nullable=False) #'mm-dd-yy'
+    rating = db.Column(db.Integer, nullable=False)
+    review_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow) #'mm-dd-yy'
     comment = db.Column(db.String, nullable=True)
 
+    share_id = db.Column(db.Integer, db.ForeignKey('shares.share_id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     # recipe_id = db.Column(db.Integer, db.ForeignKey('recipes.recipe_id'), nullable=False)
-    share_id = db.Column(db.Integer, db.ForeignKey('shares.share_id'), nullable=False)
 
+    share = db.relationship('Share', backref='reviews')
     user = db.relationship('User', backref='reviews')
     # recipe = db.relationship('Recipe', backref='reviews')
-    share = db.relationship('Share', backref='reviews')
 
     def __repr__(self):
-        return f'<Review review_id={self.review_id} review_date={self.review_date} score={self.score}>'        
+        return f'<Review review_id={self.review_id} share_id={self.share_id} user_id={self.user_id}>'        
 
 
 

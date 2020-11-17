@@ -1,15 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
+    <table>
+        <tr valign="top">
+            <td>
+                <h1>{{ user.nickname }}</h1>
+                <p>{{ user.intro }}</p>
+
+            </td>
+        </tr>
+    </table>
     <br>
-    <h2>Kimchi Jar Shares by {{ user.nickname }}</h2>
-    <br>
+    <h5>Kimchi Shares by {{ user.nickname }}</h5>
     {% for share in shares %}
         <article>
             <h2><a href="{{ url_for('share', share_id=share.share_id) }}">{{ share.share_name }}</a></h2>
             <!-- <a href="{{ url_for('user_shares', nickname=share.user.nickname) }}">{{ share.user.nickname }}</a> -->
-            <p>MADE DATE: {{ share.made_date.strftime('%m-%d-%y') }}</p>
-            <p>STATUS: {{ share.jar_status }}</p>
-            <p>{{ share.description }}</p>
+            <p>Made on: {{ share.made_date.strftime('%m-%d-%y') }}</p>
+            <p>Kimchi Status: {{ share.jar_status }}</p>
+            <p>About this Kimchi: {{ share.description }}</p>
             <br>
         </article>
     {% endfor %}

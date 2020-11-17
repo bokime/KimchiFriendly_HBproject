@@ -51,7 +51,7 @@ def register():
 
     if form.validate_on_submit():
         pw_hash = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
-        user = User(nickname=form.nickname.data, email=form.email.data, password=pw_hash, zipcode=form.zipcode.data)
+        user = User(nickname=form.nickname.data, email=form.email.data, password=pw_hash, zipcode=form.zipcode.data, intro=form.intro.data)
 
         db.session.add(user)
         db.session.commit()
@@ -102,7 +102,9 @@ def account():
     
     if form.validate_on_submit():
         current_user.nickname = form.nickname.data
+        # current_user.password = form.password.data
         current_user.zipcode = form.zipcode.data
+        current_user.intro = form.intro.data
 
         db.session.commit()
 
@@ -111,7 +113,9 @@ def account():
 
     elif request.method == 'GET':
         form.nickname.data = current_user.nickname
+        # form.password.data = current_user.password
         form.zipcode.data = current_user.zipcode
+        form.intro.data = current_user.intro
 
     return render_template('account.html', title='Account', form=form)
 
@@ -133,8 +137,8 @@ def new_share():
     form = NewShare()
 
     if request.method == "POST":
-    # if form.validate_on_submit():
-        new_share = Share(share_name=form.share_name.data, made_date=form.made_date.data, description=form.description.data, user_id=session['user_id'])
+
+        new_share = Share(share_name=form.share_name.data, made_date=form.made_date.data, description=form.description.data, jar_status=form.jar_status.data, user_id=session['user_id'])
 
         db.session.add(new_share)
         db.session.commit()
@@ -168,6 +172,7 @@ def update_share(share_id):
     if request.method == "POST":
         update_share.share_name = form.share_name.data
         update_share.made_date = form.made_date.data
+        update_share.jar_status = form.jar_status.data
         update_share.description = form.description.data
     
         db.session.commit()
@@ -178,6 +183,7 @@ def update_share(share_id):
     elif request.method == "GET":
         form.share_name.data = update_share.share_name
         form.made_date.data = update_share.made_date
+        form.jar_status.data = update_share.jar_status
         form.description.data = update_share.description
     
     return render_template('new_share.html', title='Update Jar Share', form=form, legend='Update Jar Share')
@@ -208,6 +214,8 @@ def user_shares(nickname):
 
     user = User.query.filter_by(nickname=nickname).first_or_404()
     shares = crud.get_shares_by_nickname(nickname)
+    # reviews = crud.create_review()
+
     return render_template('user_shares.html', shares=shares, user=user)   
 
 
@@ -224,4 +232,4 @@ def share_zipcode():
 
 if __name__ == '__main__':
     connect_to_db(app)
-    app.run(host='0.0.0.0', debug=True)
+    app.run(port=5000, host='0.0.0.0', debug=True)

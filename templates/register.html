@@ -78,6 +78,20 @@
                     {{ form.zipcode }}
                 {% endif %}
             </div>
+            <div>
+                {{ form.intro.label }}<br>
+                <!-- validation errors -->
+                {% if form.intro.errors %}
+                    {{ form.intro }}
+                    <div>
+                        {% for error in form.intro.errors %}
+                            <span style="color: red;">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.intro }}
+                {% endif %}
+            </div>
         </fieldset>
         <div>
             {{ form.submit() }}
