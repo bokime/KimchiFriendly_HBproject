@@ -6,7 +6,13 @@ from model import db, User, Share, Review, connect_to_db
 def create_user(nickname, email, password, zipcode, intro):
     """ create and return a new user """
 
-    user = User(nickname=nickname, email=email, password=password, zipcode=zipcode, intro=intro)
+    user = User(
+                nickname=nickname,
+                email=email,
+                password=password,
+                zipcode=zipcode,
+                intro=intro
+                )
 
     db.session.add(user)
     db.session.commit()
@@ -18,7 +24,10 @@ def create_user(nickname, email, password, zipcode, intro):
 def create_share(share_name, made_date, description, jar_status, user_id):
     """ create a new jar share """
 
-    share = Share(share_name=share_name, made_date=made_date, description=description, jar_status=jar_status, user_id=user_id)
+    share = Share(
+                    share_name=share_name, made_date=made_date, description=description, jar_status=jar_status,
+                    user_id=user_id
+                    )
 
     db.session.add(share)
     db.session.commit()
@@ -26,11 +35,18 @@ def create_share(share_name, made_date, description, jar_status, user_id):
     return share
 ### test example: create_share('red cabbage kimchi', '05-23-19', 'very spicy and tangy! so good!', 'sold', '2')  
 
+# def create_review(rating, review_date, comment, reviewer_id, share_id, reviewee_id):
+    
+#     """ create a new review """
 
-# def create_review(user, share, score):
-#     """ create and return a new review """
-
-#     review = Review(user=user, share=share, score=score)
+#     review = Review(
+#                     rating=rating,
+#                     review_date=review_date,
+#                     comment=comment,
+#                     reviewer_id=reviewer_id,
+#                     share_id=share_id,
+#                     reviewee_id=reviewee_id
+#                     )
 
 #     db.session.add(review)
 #     db.session.commit()
@@ -38,22 +54,22 @@ def create_share(share_name, made_date, description, jar_status, user_id):
 #     return review
 
 
-
-# def create_review(rating, review_date, comment, share_id, user_id):
+def create_review(rating, review_date, comment):
     
-#     user_id = db.session.query(Share).join(User).filter(Share.user_id == user_id).all()
-#     review = Review(rating=rating, review_date=review_date, comment=comment, share_id=share_id, user_id=user_id)
+    """ create a new review """
 
-#     db.session.add(review)
-#     db.session.commit()
+    review = Review(
+                    rating=rating,
+                    review_date=review_date,
+                    comment=comment
+                    )
 
-#     return review
+    db.session.add(review)
+    db.session.commit()
+
+    return review
 
 
-def get_users():
-    """Return all users."""
-    
-    return User.query.all()    
 
 
 def load_user(user_id):
@@ -62,12 +78,7 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
-def get_user_by_email(email):
-    """ return a user by email """
-
-    return User.query.filter(User.email == email).first()
-
-
+#####
 def get_shares():
     """ return all jar shares """
 
@@ -77,72 +88,23 @@ def get_shares():
 def get_share_by_id(share_id):
     """ return a share by primary key """
 
-    return Share.query.get(share_id)
+    return Share.query.get(share_id)    
 
 
-def get_share_by_share_name(share_name):
-    """ return a share by primary key """
-
-    return Share.query.get(share_name)    
-
-
-def get_share_by_user_id(user_id):
-    """ return a share by user_id """
-    return Share.query.get(user_id)
-
-
+#####
 def get_shares_by_zipcode(zipcode):
     """ query user zipcode from User obj for Share (Left Join) """ 
 
     return db.session.query(Share).join(User).filter(User.zipcode == zipcode).all() 
 
 
+#####
 def get_shares_by_nickname(nickname):
     """ query user nickname from User obj for Share (Left Join) """ 
 
     return db.session.query(Share).join(User).filter(User.nickname == nickname).all()     
 
 
-
-
-
-
-
-
-
-
-
-# def create_recipe(recipe_title, recipe_date, description, photo):
-#     """ create and return a new recipe """
-
-#     recipe = Recipe(recipe_title=recipe_title, recipe_date=recipe_date, description=description, photo=photo)
-
-#     db.session.add(recipe)
-#     db.session.commit()
-
-#     return recipe
-
-
-# def create_review(user, share, score):
-#     """ create and return a new review """
-
-#     review = Review(user=user, share=share, score=score)
-
-#     db.session.add(review)
-#     db.session.commit()
-
-#     return review
-
-
-# def create_photo(post_date):
-#     """ create and return a new photo """
-
-#     photo = Photo(post_date=post_date)
-
-#     db.session.add(photo)
-#     db.session.commit()
-
-#     return photo
 
 
 if __name__ == '__main__':

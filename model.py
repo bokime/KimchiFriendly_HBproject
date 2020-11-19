@@ -19,6 +19,7 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(60), nullable=False)
     zipcode = db.Column(db.String, nullable=False)
     intro = db.Column(db.String, nullable=True)
+    phone_number = db.Column(db.String, nullable=True)
 
     share = db.relationship('Share', backref='users', lazy=True) 
     
@@ -31,6 +32,7 @@ class User(UserMixin, db.Model):
                 email={self.email} zipcode={self.zipcode}>"""
 
 
+
 class Share(db.Model):
     """ A Jar Sahre Table """
 
@@ -41,7 +43,7 @@ class Share(db.Model):
     made_date = db.Column(db.Date, nullable=False) #'mm-dd-yy'
     description = db.Column(db.String, nullable=True)
     jar_status = db.Column(db.String(20), nullable=True)
-    img = db.Column(db.String(20), nullable=True, default='default.jpg')
+    # img = db.Column(db.String(20), nullable=True, default='default.jpg')
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     
@@ -59,38 +61,18 @@ class Review(db.Model):
 
     review_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     rating = db.Column(db.Integer, nullable=False)
-    review_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow) #'mm-dd-yy'
+    review_date = db.Column(db.DateTime, default=datetime.utcnow, nullable=False) #'mm-dd-yy'
     comment = db.Column(db.String, nullable=True)
+    reviewer_id = db.Column(db.Integer, nullable=False)
 
     share_id = db.Column(db.Integer, db.ForeignKey('shares.share_id'), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    # recipe_id = db.Column(db.Integer, db.ForeignKey('recipes.recipe_id'), nullable=False)
+    reviewee_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
 
     share = db.relationship('Share', backref='reviews')
     user = db.relationship('User', backref='reviews')
-    # recipe = db.relationship('Recipe', backref='reviews')
 
     def __repr__(self):
-        return f'<Review review_id={self.review_id} share_id={self.share_id} user_id={self.user_id}>'        
-
-
-
-# class Recipe(db.Model):
-#     """ A Recipe Table """
-
-#     __tablename__ = 'recipes'
-
-#     recipe_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-#     recipe_title = db.Column(db.String(60), nullable=False)
-#     recipe_date = db.Column(db.Date, nullable=False) #'mm-dd-yy'
-#     description = db.Column(db.String, nullable=False)
-
-#     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-
-#     user = db.relationship('User', backref='recipes')
-
-#     def __repr__(self):
-#         return f"""<Recipe recipe_id={self.recipe_id} title={self.recipe_title} description={self.description}>"""
+        return f'<Review review_id={self.review_id} reviewer_user_id={self.reviewer_user_id} share_id={self.share_id} reviewee_user_id={self.reviewee_user_id}>'        
 
 
 
@@ -144,10 +126,7 @@ if __name__ == '__main__':
     # db.session.add(new_share)
     # db.session.commit()
 
-    # new_review = Review(score=8, review_date='03-28-20', user_id='1', share_id='1') 
+    # new_review = Review(rating=8, review_date='03-28-20', comment='it was really tasty!', user_id='1', share_id='1') 
     # db.session.add(new_review)
     # db.session.commit()
     
-    # new_recipe = Recipe(recipe_title='kimchi01', recipe_date='02-23-19', description='this is the best summer kimchi. easy to make')
-    # db.session.add(new_recipe)
-    # db.session.commit()

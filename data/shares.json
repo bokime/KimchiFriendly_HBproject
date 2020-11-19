@@ -8,28 +8,20 @@
 		"jar_status": "fermenting"
 	},
 	{
+		"user_id": 3,
+		"share_name": "Cucumber Kimchi",
+		"made_date": "01-02-20",
+		"description": "tempus mauris erat eget ipsum. Suspendisse sagittis. Nullam vitae diam. Proin dolor. Nulla semper tellus id",
+		"zipcode": "55409",
+		"jar_status": "fermenting"
+	},
+	{
 		"user_id": 1,
 		"share_name": "Unfermented napa cabbage Kimchi",
 		"made_date": "02-02-20",
 		"description": "Aliquam nisl. Nulla eu neque pellentesque massa lobortis ultrices. Vivamus rhoncus. Donec est. Nunc ullamcorper, velit in",
 		"zipcode": "55407",
 		"jar_status": "on market"
-	},
-	{
-		"user_id": 1,
-		"share_name": "Wrapped Kimchi",
-		"made_date": "03-24-20",
-		"description": "tempus scelerisque, lorem ipsum sodales purus, in molestie tortor nibh sit amet orci. Ut sagittis lobortis",
-		"zipcode": "55407",
-		"jar_status": "fermenting"
-	},
-	{
-		"user_id": 2,
-		"share_name": "White Kimchi, made without chili pepper",
-		"made_date": "01-24-20",
-		"description": "nascetur ridiculus mus. Proin vel arcu eu odio tristique pharetra. Quisque ac libero nec ligula consectetuer rhoncus. Nullam velit dui,",
-		"zipcode": "55404",
-		"jar_status": "fermenting"
 	},
 	{
 		"user_id": 2,
@@ -40,52 +32,12 @@
 		"jar_status": "on market"
 	},
 	{
-		"user_id": 2,
-		"share_name": "A mildly spicy watery Kimchi",
-		"made_date": "02-03-20",
-		"description": "eleifend, nunc risus varius orci, in consequat enim diam vel",
-		"zipcode": "55404",
-		"jar_status": "fermenting"
-	},
-	{
-		"user_id": 2,
-		"share_name": "Cubed chonggak 'ponytail' radish, a popular spicy Kimchi",
-		"made_date": "01-22-20",
-		"description": "et ultrices posuere cubilia Curae; Phasellus ornare. Fusce mollis. Duis sit amet diam",
-		"zipcode": "55404",
-		"jar_status": "sold"
-	},
-	{
-		"user_id": 3,
-		"share_name": "Spicy cubed Korean radish strongly-scented Kimchi containing fermented shrimp",
-		"made_date": "04-22-20",
-		"description": "Suspendisse sagittis. Nullam vitae diam. Proin dolor. Nulla semper tellus",
-		"zipcode": "55409",
-		"jar_status": "on market"
-	},
-	{
-		"user_id": 3,
-		"share_name": "Cucumber Kimchi",
-		"made_date": "01-02-20",
-		"description": "tempus mauris erat eget ipsum. Suspendisse sagittis. Nullam vitae diam. Proin dolor. Nulla semper tellus id",
-		"zipcode": "55409",
-		"jar_status": "fermenting"
-	},
-	{
 		"user_id": 3,
 		"share_name": "Spicy green onion Kimchi",
 		"made_date": "04-16-20",
 		"description": "montes, nascetur ridiculus mus. Proin vel nisl. Quisque fringilla euismod enim.",
 		"zipcode": "55409",
 		"jar_status": "sold"
-	},
-	{
-		"user_id": 3,
-		"share_name": "Yeolmu Radishes",
-		"made_date": "01-11-20",
-		"description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
-		"zipcode": "55409",
-		"jar_status": "fermenting"
 	},
 	{
 		"user_id": 4,
@@ -96,19 +48,11 @@
 		"jar_status": "sold"
 	},
 	{
-		"user_id": 4,
-		"share_name": "Yangbaechu Kimchi",
-		"made_date": "03-26-20",
-		"description": "dignissim magna a tortor. Nunc commodo auctor velit. Aliquam nisl. Nulla eu neque pellentesque",
-		"zipcode": "55408",
-		"jar_status": "on market"
-	},
-	{
-		"user_id": 4,
-		"share_name": "A mildly spicy watery Kimchi",
-		"made_date": "02-26-20",
-		"description": "Donec elementum, lorem ut aliquam iaculis, lacus pede sagittis augue,",
-		"zipcode": "55408",
+		"user_id": 2,
+		"share_name": "Cubed chonggak 'ponytail' radish, a popular spicy Kimchi",
+		"made_date": "01-22-20",
+		"description": "et ultrices posuere cubilia Curae; Phasellus ornare. Fusce mollis. Duis sit amet diam",
+		"zipcode": "55404",
 		"jar_status": "sold"
 	},
 	{
@@ -120,14 +64,6 @@
 		"jar_status": "fermenting"
 	},
 	{
-		"user_id": 4,
-		"share_name": "Unfermented napa cabbage Kimchi",
-		"made_date": "06-02-20",
-		"description": "commodo tincidunt nibh. Phasellus nulla. Integer vulputate, risus a ultricies adipiscing, enim",
-		"zipcode": "55408",
-		"jar_status": "on market"
-	},
-	{
 		"user_id": 5,
 		"share_name": "Cucumber Kimchi",
 		"made_date": "03-18-20",
@@ -136,27 +72,11 @@
 		"jar_status": "on market"
 	},
 	{
-		"user_id": 5,
-		"share_name": "Gat Kimchi",
-		"made_date": "05-29-20",
-		"description": "urna suscipit nonummy. Fusce fermentum fermentum arcu. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices",
-		"zipcode": "55419",
-		"jar_status": "sold"
-	},
-	{
-		"user_id": 5,
-		"share_name": "Spicy napa cabbage Kimchi",
-		"made_date": "03-11-20",
-		"description": "Suspendisse aliquet molestie tellus. Aenean egestas hendrerit neque. In ornare sagittis felis. Donec tempor, est ac mattis semper, dui",
-		"zipcode": "55419",
-		"jar_status": "fermenting"
-	},
-	{
-		"user_id": 5,
-		"share_name": "Aged yangbaechu Kimchi",
-		"made_date": "09-07-19",
-		"description": "rutrum lorem ac risus. Morbi metus. Vivamus euismod urna. Nullam lobortis quam a felis ullamcorper viverra.",
-		"zipcode": "55419",
-		"jar_status": "fermenting"
+		"user_id": 4,
+		"share_name": "Unfermented napa cabbage Kimchi",
+		"made_date": "06-02-20",
+		"description": "commodo tincidunt nibh. Phasellus nulla. Integer vulputate, risus a ultricies adipiscing, enim",
+		"zipcode": "55408",
+		"jar_status": "on market"
 	}
 ]

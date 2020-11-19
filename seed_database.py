@@ -48,7 +48,7 @@ for share in share_data:
     share_name = share['share_name']
     made_date = datetime.strptime(share['made_date'], '%m-%d-%y')
     description = share['description']
-    zipcode = share['zipcode']
+    # zipcode = share['zipcode']
     jar_status = share['jar_status']
     user_id = share['user_id'] 
 
@@ -57,18 +57,18 @@ for share in share_data:
 
 
 
-# """ seed dummy review data """
+""" seed dummy review data """
 
-####### user_id isn't Nullable. how do I seed user_id? #######
+with open('data/reviews.json') as r:
+    review_data = json.loads(r.read())
 
-# with open('data/reviews.json') as r:
-#     review_data = json.loads(r.read())
+for review in review_data:
 
-# for review in review_data:
+    rating = review['rating']
+    review_date = datetime.strptime(review['review_date'], '%m-%d-%y')
+    comment = review['comment']
+    reviewer_id = review['reviewer_id']
+    share_id = review['share_id']
+    reviewee_id = review['reviewee_id']
 
-#     rating = review['rating']
-#     review_date = datetime.strptime(review['review_date'], '%m-%d-%y')
-#     comment = review['comment']
-#     share_id = review['share_id']
-
-#     crud.create_review(rating, review_date, comment, share_id)
+    crud.create_review(rating, review_date, comment, reviewer_id, share_id, reviewee_id)

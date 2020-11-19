@@ -11,23 +11,40 @@
                 <p>Made on {{ share.made_date.strftime('%m-%d-%y') }}</p>
                 <p>Kimchi Status: {{ share.jar_status }}</p>
             </div>
-            <!-- <div class="media">
-                <img class="rounded-circle account-img" src="static/img/default.jpg">
-            </div> -->
-            <p>About this Kimchi: {{ share.description }}</p>
+            <p>Message from the Maker : {{ share.description }}</p>
         </div>
     </article>
     {% if share.user_id == current_user.user_id %}
         <li>
-            <a href="{{ url_for('update_share', share_id=share.share_id) }}">Update</a>
+            <a href="{{ url_for('update_share', share_id=share.share_id) }}"><input type="submit" value="Update"></a>
         </li> 
         <form action="{{ url_for('delete_share', share_id=share.share_id) }}" method="POST">
-            <button type="submit">Delete</button>
+            <input type="submit" value="Delete">
         </form>
     {% else %}
-        <form class= "request" action="#" method="POST">
-            <button type="submit">Request</button>
+        <br>
+        <form action="#" method="POST">
+            <p>Wanna try {{ share.user.nickname }}'s Kimchi Share?</p>
+            <input id="request" type="submit" value="Request">
         </form>
+        <br>
+        <br>
+        <form action="#" method="POST">
+            <div class="comment">
+                <p>How was Kimchi Sharing with {{ share.user.nickname }}?</p>
+                <textarea rows="3" cols="100" name="review_comment">Comment:</textarea>
+            </div>
+            <div class="rating">
+                <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Rocks!"> 5 stars</label>
+                <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good"> 4 stars</label>
+                <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Meh"> 3 stars</label>
+                <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad"> 2 stars</label>
+                <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="My tummy hurts"> 1 star</label>
+            </div>
+            <input type="text" name="review_date">
+            <input type="submit" value="Submit">
+        </form>
+        
     {% endif %}
 
 {% endblock content %}

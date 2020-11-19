@@ -2,18 +2,19 @@
 import os
 from twilio.rest import Client
 
-# Your Account Sid and Auth Token from twilio.com/console
-# and set the environment variables. See http://twil.io/secure
 account_sid = os.environ['TWILIO_ACCOUNT_SID']
 auth_token = os.environ['TWILIO_AUTH_TOKEN']
+my_number = os.environ['MY_NUMBER']
+twilio_number = os.environ['TWILIO_NUMBER']
+
 
 client = Client(account_sid, auth_token)
 
 message = client.messages \
                 .create(
-                    body="hello! Bacon.",
-                    from_='+17068009762',
-                    to='+16462467020'
-                )
+                    body="Hello! Your neighbor requested your Kimchi jar share!",
+                    from_=twilio_number,
+                    to=my_number
+                    )
 
 print(message.sid)

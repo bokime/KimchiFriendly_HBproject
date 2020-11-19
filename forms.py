@@ -63,7 +63,7 @@ class NewShare(FlaskForm):
     share_name = StringField('Title', validators=[DataRequired()])
     made_date = DateField('When did you make?', format='%m-%d-%y')
     description = TextAreaField('About This Kimchi', validators=[DataRequired()])
-    jar_status = SelectField('Status', choices= [('Fermenting'),('Ready for Sharing'),('Sold')])
+    jar_status = SelectField('Status', choices= ['Fermenting','Ready for Sharing','Sold'])
     # image = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])                                            
     submit = SubmitField('Submit')
 
@@ -75,3 +75,4 @@ class NewShare(FlaskForm):
 #                         choices=[0,1,2,3,4,5,6,7,8,9,10])
 #     review_date = DateField('Review Date', format='%m-%d-%y', validators=[DataRequired()])
 #     comment = TextAreaField('How was your Kimchi sharing?', Length(max=300))
+#     submit = SubmitField('Submit')
