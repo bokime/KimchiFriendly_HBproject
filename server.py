@@ -259,19 +259,16 @@ def user_review(nickname):
         return render_template('user_profile.html')
 
     if request.method == 'POST':
+
         rating = request.form.get('rating')
         review_date = request.form.get('review_date')
-        comment = request.form.get('comment')
+        comment = request.form.get('review_comment')
+        maker_id = request.form.get('maker_id')
+        reviewer_id = session['user_id']
 
-        reviewer_id = crud.load_user(session['user_id'])
         review = crud.create_review(rating, review_date, comment, reviewer_id, maker_id)
-        maker_id = review.maker_id
         
         db.session.add(review)
-
-        reviewer_id.reviews.append(review)
-        maker_id.reviews.append(review)
-
         db.session.commit()
 
         flash('Your review has been submitted!', 'success')
@@ -279,7 +276,7 @@ def user_review(nickname):
 
 
 
-@app.route('/home/<share_id>', methods=['POST'])
+@app.route('/home/<share_id>/review_delete', methods=['POST'])
 @login_required
 def delete_review(review_id):
     """ delete user's review """

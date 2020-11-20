@@ -37,7 +37,6 @@ def create_share(share_name, made_date, description, jar_status, user_id):
 ### test example: share1=create_share('napa cabbage kimchi', '05-23-19', 'very spicy and tangy! so good!', 'sold', '2')  
 
 def create_review(rating, review_date, comment, reviewer_id, maker_id):
-    
     """ create a new review """
 
     review = Review(
@@ -52,7 +51,7 @@ def create_review(rating, review_date, comment, reviewer_id, maker_id):
     db.session.commit()
 
     return review
-# review_1 = create_review('7', '11-18-20', 'it was great!', user1.user_id, share1.share_id, user2.user_id)
+# review1 = create_review('7', '11-18-20', 'it was great!', user3.user_id, user2.user_id)
 
 # def create_review(rating, review_date, comment):
     
@@ -68,8 +67,6 @@ def create_review(rating, review_date, comment, reviewer_id, maker_id):
 #     db.session.commit()
 
 #     return review
-
-
 
 def load_user(user_id):
     """ return a user by primary key """
@@ -108,7 +105,6 @@ def get_shares_by_user_id(user_id):
     """ query user nickname from User obj for Share (Left Join) """ 
 
     return db.session.query(Share).join(User).filter(User.user_id == user_id).all() 
-
 
 
 if __name__ == '__main__':

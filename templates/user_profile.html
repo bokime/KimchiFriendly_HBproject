@@ -1,50 +1,56 @@
 {% extends "base.html" %}
 {% block content %}
-
-    <tr valign="top">
-        <h1>{{ user.nickname }}</h1>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <br>
+    <body>
+        <h5>Kimchi Jar Shares by <h1>{{ user.nickname }}</h1></h5>
         <p>{{ user.intro }}</p>
-    </tr>
-    <br>
-    <h5>Kimchi Shares by {{ user.nickname }}</h5>
-    {% for share in shares %}
-        <h3><a href="{{ url_for('share', share_id=share.share_id) }}">{{ share.share_name }}</a></h3>
-        <!-- <a href="{{ url_for('user_shares', nickname=share.user.nickname) }}">{{ share.user.nickname }}</a> -->
-        <p>Made on: {{ share.made_date.strftime('%m-%d-%y') }}</p>
-        <p>Kimchi Status: {{ share.jar_status }}</p>
-        <p>About this Kimchi: {{ share.description }}</p>
         <br>
-    {% endfor %}
-    <br>
-    <form action="" method="POST">
-        <div class="comment">
-            <p>How was Kimchi Sharing with {{ user.nickname }}?</p>
-            <textarea rows="2" cols="60" name="review_comment"></textarea>
-        </div>
-        <div class="rating">
-            <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Rocks!"> 5 stars</label>
-            <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good"> 4 stars</label>
-            <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Meh"> 3 stars</label>
-            <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad"> 2 stars</label>
-            <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="My tummy hurts"> 1 star</label>
-        </div>
-        <p>Review Date: <input type="text" name="review_date"\></p>
-        <input type="submit" value="Submit">
-    </form>
-    <br>
-    <article>
-        <h5>How was {{ user.nickname }}'s Kimchi?: </h5> 
-        {% for review in user.reviews %}
-            <p>Reviewer: {{ review.reviewer_id }} | Review Date: {{ review.review_date.strftime('%m-%d-%y') }} | Rating: {{ review.rating }}</p>
-            <p>Comment: {{ review.comment }}</p>
-            {% if review.reviewer_id == current_user.user_id %}
-                <form action="{{ url_for('delete_review', share_id=review.share_id) }}" method="POST">
-                    <input type="submit" value="Delete">
-                </form>
-            {% endif %}
+        {% for share in shares %}
+            <h5><a href="{{ url_for('share', share_id=share.share_id) }}">{{ share.share_name }}</a></h5>
+            <!-- <a href="{{ url_for('user_shares', nickname=share.user.nickname) }}">{{ share.user.nickname }}</a> -->
+            <p>Made on: {{ share.made_date.strftime('%m-%d-%y') }}</p>
+            <p>Kimchi Status: {{ share.jar_status }}</p>
+            <p>About this Kimchi: {{ share.description }}</p>
             <br>
         {% endfor %}
-    </article>
-    <br>
+        <br>
+        <!-- *** review form *** -->
+        <form action="" method="POST">
+            <div class="comment">
+                <p>How was Kimchi Sharing with {{ user.nickname }}?</p>
+                Comment: <textarea rows="2" cols="60" name="review_comment"></textarea>
+            </div>
+            <!-- radio button rating -->
+            <div class="rating">
+                <input type="radio" id="star5" name="rating" value="5" />
+                <label for="star5" title="Rocks!">5 stars</label>
+                <input type="radio" id="star4" name="rating" value="4" />
+                <label for="star4" title="Pretty good">4 stars</label>
+                <input type="radio" id="star3" name="rating" value="3" />
+                <label for="star3" title="Meh">3 stars</label>
+                <input type="radio" id="star2" name="rating" value="2" />
+                <label for="star2" title="Kinda bad">2 stars</label>
+                <input type="radio" id="star1" name="rating" value="1" />
+                <label for="star1" title="My tummy hurts">1 star</label>
+            </div>
+            <p>Review Date: <input type="text" name="review_date"\> <input type="submit" value="Submit"></p>
+            <input type="hidden" name= "maker_id" value="{{ user.user_id }}">
+        </form>
+        <br>
+        <article>
+            <h5>How was {{ user.nickname }}'s Kimchi?: </h5> 
+            <!-- display maker's review -->
+            {% for review in user.reviews %}
+                <p>Reviewer: {{ current_user.nickname }} | Review Date: {{ review.review_date.strftime('%m-%d-%y') }} | Rating: {{ review.rating }}</p>
+                <p>Comment: {{ review.comment }}</p>
+                <br>
+            {% endfor %}
+        </article>
+        <br>
+    </body>
 
 {% endblock content %}

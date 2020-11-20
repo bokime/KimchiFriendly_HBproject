@@ -20,7 +20,6 @@ $('#request-btn').on('click', () => {
 //     }
 // })
 
-
 // function goPython(){
 //     $.ajax({
 //         url: "/send_sms.py",
@@ -29,9 +28,6 @@ $('#request-btn').on('click', () => {
 //         alert('finished python script');;
 //     });
 // }
-
-
-
 
 // $('#review-form').on('submit', (evt) => {
 //     evt.preventDefault();
