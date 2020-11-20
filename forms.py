@@ -13,6 +13,7 @@ class Registration(FlaskForm):
     nickname = StringField('Nickname',
                             validators=[DataRequired(), Length(min=5, max=20)])
     email = StringField('Email', validators=[DataRequired(), Email()])
+    phone_number = StringField('phone_number')
     password = PasswordField('Password', validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password',
                                         validators=[DataRequired(), EqualTo('password')])

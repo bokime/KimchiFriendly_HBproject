@@ -31,11 +31,14 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
+
 @app.route('/')
 @app.route('/home')
 def home():
     """ Home page showing posted jar shares """
-    shares = crud.get_shares()
+    page = request.args.get('page', 1, type=int)
+    shares = Share.query.order_by(Share.made_date.desc()).paginate(page=page, per_page=5) 
+    # shares = crud.get_shares()
     return render_template('home.html', shares=shares, title='Welcome')
 
 
@@ -50,8 +53,14 @@ def register():
     form = Registration()
 
     if form.validate_on_submit():
+
         pw_hash = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
-        user = User(nickname=form.nickname.data, email=form.email.data, password=pw_hash, zipcode=form.zipcode.data, intro=form.intro.data)
+        user = User(nickname=form.nickname.data,
+                    email=form.email.data,
+                    phone_number=form.phone_number.data,
+                    password=pw_hash,
+                    zipcode=form.zipcode.data,
+                    intro=form.intro.data)
 
         db.session.add(user)
         db.session.commit()
@@ -78,6 +87,7 @@ def login():
 
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
+            
             session['user_id']= user.user_id
             return redirect(url_for("home"))
         else:
@@ -106,7 +116,8 @@ def account():
     
     if form.validate_on_submit():
         current_user.nickname = form.nickname.data
-        # current_user.password = form.password.data
+        current_user.phone_number = form.phone_number.data
+        current_user.password = form.password.data
         current_user.zipcode = form.zipcode.data
         current_user.intro = form.intro.data
 
@@ -117,11 +128,24 @@ def account():
 
     elif request.method == 'GET':
         form.nickname.data = current_user.nickname
-        # form.password.data = current_user.password
+        form.phone_number.data = current_user.phone_number
+        form.password.data = current_user.password
         form.zipcode.data = current_user.zipcode
         form.intro.data = current_user.intro
 
     return render_template('account.html', title='Account', form=form)
+
+
+
+@app.route('/home', methods=['POST'])
+@login_required
+def share_zipcode(): 
+    """ show Kimchi shares in the user's input zipcode """
+
+    zipcode = request.form.get('zipcode')
+    shares = crud.get_shares_by_zipcode(zipcode)
+
+    return render_template('share_zipcode.html', shares=shares, zipcode=zipcode)
 
 
 
@@ -150,28 +174,6 @@ def new_share():
 
 
 
-
-################### TWILIO #####################
-account_sid = os.environ['TWILIO_ACCOUNT_SID']
-auth_token = os.environ['TWILIO_AUTH_TOKEN']
-# my_number = os.getenv['MY_NUMBER']
-# twilio_number = os.getenv['TWILIO_NUMBER']
-
-def send_request():
-    client = Client(account_sid, auth_token)
-
-    message = client.messages \
-                    .create(
-                        body="Hello! Your neighbor requested your Kimchi jar share!",
-                        from_="+17068009762",
-                        to="+16462467020"
-                        )
-
-    return print(message.sid)
-#################################################
-
-
-
 @app.route('/home/<share_id>')
 def share(share_id):
     """ show the detail of each Kimchi Jar Share """
@@ -186,6 +188,7 @@ def share(share_id):
 @login_required
 def update_share(share_id):
     """ update user's share posting """
+
     update_share = Share.query.get_or_404(share_id)
 
     if update_share.user_id != current_user.user_id:
@@ -219,6 +222,7 @@ def update_share(share_id):
 @login_required
 def delete_share(share_id):
     """ delete user's share posting """
+
     delete_share = Share.query.get(share_id)
 
     if delete_share.user_id != current_user.user_id:
@@ -245,47 +249,53 @@ def user_shares(nickname):
     return render_template('user_profile.html', shares=shares, user=user)   
 
 
-
-@app.route('/home', methods=['POST'])
-@login_required
-def share_zipcode(): 
-    """ show Kimchi shares in the user's input zipcode """
-
-    zipcode = request.form.get('zipcode')
-    shares = crud.get_shares_by_zipcode(zipcode)
-
-    return render_template('share_zipcode.html', shares=shares, zipcode=zipcode)
-
-
 ##################### REVIEW #####################    
-@app.route('/home/<share_id>', methods=['GET','POST'])
+@app.route('/user/<nickname>', methods=['GET','POST'])
 @login_required
-def new_review(share_id): 
-    """ add new Kimchi share review """
-    
-    share = crud.get_share_by_id(share_id)
-    reviewer = crud.load_user(session['user_id'])
+def user_review(nickname): 
+    """ add new Kimchi maker review """
 
     if request.method == 'GET':
-        return render_template('home.html')
+        return render_template('user_profile.html')
 
     if request.method == 'POST':
-        
         rating = request.form.get('rating')
-        comment = request.form.get('comment')
         review_date = request.form.get('review_date')
+        comment = request.form.get('comment')
 
-        review = crud.create_review(rating, review_date, comment)
-
+        reviewer_id = crud.load_user(session['user_id'])
+        review = crud.create_review(rating, review_date, comment, reviewer_id, maker_id)
+        maker_id = review.maker_id
+        
         db.session.add(review)
 
-        reviewer.reviews.append(review)
-        share.reviews.append(review)
+        reviewer_id.reviews.append(review)
+        maker_id.reviews.append(review)
 
         db.session.commit()
 
         flash('Your review has been submitted!', 'success')
-    return render_template('home.html')
+    return redirect(f'/user/{nickname}')
+
+
+
+@app.route('/home/<share_id>', methods=['POST'])
+@login_required
+def delete_review(review_id):
+    """ delete user's review """
+
+    delete_review = Review.query.get(review_id)
+
+    if delete_review.reviewer_id != current_user.user_id:
+        flash('Watch out! This is not your review.', 'danger')
+        return redirect(url_for('/home/<share_id>'))
+
+    else:    
+        db.session.delete(delete_review)
+        db.session.commit()
+        
+        flash('Your review has been deleted.', 'sucess')
+        return redirect(url_for('/home/<share_id>'))
 
 
 

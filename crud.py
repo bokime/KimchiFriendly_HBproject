@@ -18,7 +18,8 @@ def create_user(nickname, email, password, zipcode, intro):
     db.session.commit()
 
     return user
-### test example: create_user('lena', 'lena@test.com', 'password', '12345', 'I like kimchi!')    
+### test example: user1=create_user('mars', 'mars@test.com', 'password', '12345', 'I like kimchi!') 
+# user2=create_user('jupiter', 'jupiter@test.com', 'password', '12345', 'I like kimchi!')   
 
 
 def create_share(share_name, made_date, description, jar_status, user_id):
@@ -33,42 +34,40 @@ def create_share(share_name, made_date, description, jar_status, user_id):
     db.session.commit()
 
     return share
-### test example: create_share('red cabbage kimchi', '05-23-19', 'very spicy and tangy! so good!', 'sold', '2')  
+### test example: share1=create_share('napa cabbage kimchi', '05-23-19', 'very spicy and tangy! so good!', 'sold', '2')  
 
-# def create_review(rating, review_date, comment, reviewer_id, share_id, reviewee_id):
-    
-#     """ create a new review """
-
-#     review = Review(
-#                     rating=rating,
-#                     review_date=review_date,
-#                     comment=comment,
-#                     reviewer_id=reviewer_id,
-#                     share_id=share_id,
-#                     reviewee_id=reviewee_id
-#                     )
-
-#     db.session.add(review)
-#     db.session.commit()
-
-#     return review
-
-
-def create_review(rating, review_date, comment):
+def create_review(rating, review_date, comment, reviewer_id, maker_id):
     
     """ create a new review """
 
     review = Review(
                     rating=rating,
                     review_date=review_date,
-                    comment=comment
+                    comment=comment,
+                    reviewer_id=reviewer_id,
+                    maker_id=maker_id
                     )
 
     db.session.add(review)
     db.session.commit()
 
     return review
+# review_1 = create_review('7', '11-18-20', 'it was great!', user1.user_id, share1.share_id, user2.user_id)
 
+# def create_review(rating, review_date, comment):
+    
+#     """ create a new review """
+
+#     review = Review(
+#                     rating=rating,
+#                     review_date=review_date,
+#                     comment=comment
+#                     )
+
+#     db.session.add(review)
+#     db.session.commit()
+
+#     return review
 
 
 
@@ -104,6 +103,11 @@ def get_shares_by_nickname(nickname):
 
     return db.session.query(Share).join(User).filter(User.nickname == nickname).all()     
 
+
+def get_shares_by_user_id(user_id):
+    """ query user nickname from User obj for Share (Left Join) """ 
+
+    return db.session.query(Share).join(User).filter(User.user_id == user_id).all() 
 
 
 

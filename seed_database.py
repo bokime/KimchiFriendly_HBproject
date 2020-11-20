@@ -68,7 +68,6 @@ for review in review_data:
     review_date = datetime.strptime(review['review_date'], '%m-%d-%y')
     comment = review['comment']
     reviewer_id = review['reviewer_id']
-    share_id = review['share_id']
     reviewee_id = review['reviewee_id']
 
-    crud.create_review(rating, review_date, comment, reviewer_id, share_id, reviewee_id)
+    crud.create_review(rating, review_date, comment, reviewer_id, reviewee_id)

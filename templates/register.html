@@ -1,105 +1,90 @@
 {% extends 'base.html' %}
 {% block content %}
+    <br>
     <h1>Register</h1>
-    <form method="POST" action="">
+    <br>
+    <form action="" method="POST">
         {{ form.hidden_tag() }}
-        <fieldset>
-            <div>
+            <p>
                 {{ form.nickname.label }}
-                <!-- validation errors  -->
                 {% if form.nickname.errors %}
                     {{ form.nickname }}
-                    <div>
                         {% for error in form.nickname.errors %}
                             <span style="color: red;">{{ error }}</span>
                         {% endfor %}
-                    </div>
                 {% else %}
                     {{ form.nickname }}
                 {% endif %}
-            </div>
-            <div>
+            </p>
+            <p>
                 {{ form.email.label }}
-
-                <!-- validation errors  -->
                 {% if form.email.errors %}
                     {{ form.email }}
-                    <div>
                         {% for error in form.email.errors %}
                             <span style="color: red;">{{ error }}</span>
                         {% endfor %}
-                    </div>
                 {% else %}
                     {{ form.email }}
                 {% endif %}
-            </div>
-            <div>
+            </p>
+            <p>
+                {{ form.phone_number.label }}
+                {% if form.phone_number.errors %}
+                    {{ form.phone_number }}
+                        {% for error in form.phone_number.errors %}
+                            <span style="color: red;">{{ error }}</span>
+                        {% endfor %}
+                {% else %}
+                    {{ form.phone_number }}
+                {% endif %}
+            </p>
+            <p>
                 {{ form.password.label }}
-
-                <!-- validation errors  -->
                 {% if form.password.errors %}
                     {{ form.password }}
-                    <div>
                         {% for error in form.password.errors %}
                             <span style="color: red;">{{ error }}</span>
                         {% endfor %}
-                    </div>
                 {% else %}
                     {{ form.password }}
                 {% endif %}
-            </div>
-            <div>
+            </p>
+            <p>
                 {{ form.confirm_password.label }}
-
-                <!-- validation errors  -->
                 {% if form.confirm_password.errors %}
                     {{ form.confirm_password }}
-                    <div>
                         {% for error in form.confirm_password.errors %}
                             <span style="color: red;">{{ error }}</span>
                         {% endfor %}
-                    </div>
                 {% else %}
                     {{ form.confirm_password }}
                 {% endif %}
-            </div>
-            <div>
+            </p>
+            <p>
                 {{ form.zipcode.label }}
-
-                <!-- validation errors  -->
                 {% if form.zipcode.errors %}
                     {{ form.zipcode }}
-                    <div>
                         {% for error in form.zipcode.errors %}
                             <span style="color: red;">{{ error }}</span>
                         {% endfor %}
-                    </div>
                 {% else %}
                     {{ form.zipcode }}
                 {% endif %}
-            </div>
-            <div>
-                {{ form.intro.label }}<br>
-                <!-- validation errors -->
+            </p>
+            <p>
+                {{ form.intro.label }}
                 {% if form.intro.errors %}
                     {{ form.intro }}
-                    <div>
                         {% for error in form.intro.errors %}
                             <span style="color: red;">{{ error }}</span>
                         {% endfor %}
-                    </div>
                 {% else %}
                     {{ form.intro }}
                 {% endif %}
-            </div>
-        </fieldset>
-        <div>
-            {{ form.submit() }}
-        </div>
-    </form>
-    <div>
+            </p>
+            <p>{{ form.submit() }}</p>
         <small>
             Already Have An Account? <a href="{{ url_for('login') }}">Sign In</a>
         </small>
-    </div>
+    </form>
 {% endblock content %}
