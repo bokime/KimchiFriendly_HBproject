@@ -47,10 +47,16 @@
             {% for review in user.reviews %}
                 <p>Reviewer: {{ current_user.nickname }} | Review Date: {{ review.review_date.strftime('%m-%d-%y') }} | Rating: {{ review.rating }}</p>
                 <p>Comment: {{ review.comment }}</p>
+
+                {% if review.reviewer_id == current_user.user_id %}
+                    <form action="{{ url_for('delete_review', review_id=review.review_id) }}" method="POST">
+                        <input type="submit" value="Delete">
+                    </form>
+                {% endif %}
+                
                 <br>
             {% endfor %}
         </article>
         <br>
     </body>
-
 {% endblock content %}
