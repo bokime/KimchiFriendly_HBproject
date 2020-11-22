@@ -24,7 +24,7 @@
             <div>
                 <h2><a href="{{ url_for('share', share_id=share.share_id) }}">{{ share.share_name }}</a></h2>
                 <div>
-                    <a href="{{ url_for('user_shares', nickname=share.user.nickname) }}">{{ share.user.nickname }}</a>
+                    <a href="{{ url_for('user_shares', user_id=share.user.user_id) }}">{{ share.user.nickname }}</a>
                     <small >{{ share.made_date.strftime('%m-%d-%y') }}</small>
                 </div>
                 <p>{{ share.description }}</p>

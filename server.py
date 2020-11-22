@@ -216,7 +216,6 @@ def update_share(share_id):
     return render_template('new_share.html', title='Update Jar Share', form=form, legend='Update Jar Share')
 
 
-
 @app.route('/home/<share_id>/delete', methods=['POST'])
 @login_required
 def delete_share(share_id):
@@ -237,24 +236,21 @@ def delete_share(share_id):
 
 
 
-@app.route('/user/<nickname>')
+@app.route('/user/<user_id>')
 @login_required
-def user_shares(nickname):
+def user_shares(user_id):
     """ show the user's kimchi share history """
 
-    user = User.query.filter_by(nickname=nickname).first_or_404()
-    # page = request.args.get('page', 1, type=int)
-    # get_review = crud.get_reviews_by_user_id(user_id=user.user_id)
-    shares = crud.get_shares_by_nickname(nickname)
+    user = User.query.filter_by(user_id=user_id).first_or_404()
+    shares = crud.get_shares_by_user_id(user_id)
 
     return render_template('user_profile.html', shares=shares, user=user)   
 
 
-###### reviwer's nickname has to be passed
-## creating review    
-@app.route('/user/<nickname>', methods=['POST'])
+
+@app.route('/user/<user_id>', methods=['POST'])
 @login_required
-def user_review(nickname): 
+def user_review(user_id): 
     """ add new Kimchi maker review """
 
     if request.method == 'POST':
@@ -272,11 +268,10 @@ def user_review(nickname):
         db.session.commit()
 
         flash('Your review has been submitted!', 'success')
-    return redirect(f'/user/{nickname}')
+    return redirect(f'/user/{user_id}')
 
 
-###### redirect(/user/<nickname>)
-## Deleting review
+
 @app.route('/user/<review_id>/delete', methods=['POST'])
 @login_required
 def delete_review(review_id):
@@ -287,30 +282,11 @@ def delete_review(review_id):
     db.session.delete(delete_review)
     db.session.commit()
     
-    flash('Your review has been deleted.', 'sucess')
-    return redirect('/')
+    flash('Your review has been deleted.', 'success')
+    return redirect(url_for('user_shares', user_id=delete_review.maker_id))
 
 
-
-
+    
 if __name__ == '__main__':
     connect_to_db(app)
     app.run(port=5000, host='0.0.0.0', debug=True)
-
-
-
-
-
-# ## Deleting review
-# @app.route('/user/<review_id>/delete', methods=['POST'])
-# @login_required
-# def delete_review(review_id):
-#     """ delete user's review """
-    
-#     delete_review = Review.query.get(review_id)
-
-#     db.session.delete(delete_review)
-#     db.session.commit()
-    
-#     flash('Your review has been deleted.', 'sucess')
-#     return redirect('/')
