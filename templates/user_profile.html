@@ -9,14 +9,18 @@
         <h5>Kimchi Jar Shares by <h1>{{ user.nickname }}</h1></h5>
         <p>{{ user.intro }}</p>
         <br>
-        {% for share in shares %}
-            <h5><a href="{{ url_for('share', share_id=share.share_id) }}">{{ share.share_name }}</a></h5>
-            <!-- <a href="{{ url_for('user_shares', nickname=share.user.nickname) }}">{{ share.user.nickname }}</a> -->
-            <p>Made on: {{ share.made_date.strftime('%m-%d-%y') }}</p>
-            <p>Kimchi Status: {{ share.jar_status }}</p>
-            <p>About this Kimchi: {{ share.description }}</p>
-            <br>
-        {% endfor %}
+        <table id="share-detail">
+            <tr>
+            {% for share in shares %}
+                <h5><a href="{{ url_for('share', share_id=share.share_id) }}">{{ share.share_name }}</a></h5>
+                <!-- <a href="{{ url_for('user_shares', nickname=share.user.nickname) }}">{{ share.user.nickname }}</a> -->
+                <p>Made on: {{ share.made_date.strftime('%m-%d-%y') }}</p>
+                <p>Kimchi Status: {{ share.jar_status }}</p>
+                <p>About this Kimchi: {{ share.description }}</p>
+                <br>   
+            {% endfor %}
+            </tr>
+        </table> 
         <br>
         <!-- *** review form *** -->
         <form action="" method="POST">
@@ -45,7 +49,7 @@
             <h5>How was {{ user.nickname }}'s Kimchi?: </h5> 
             <!-- display maker's review -->
             {% for review in user.reviews %}
-                <p>Reviewer: {{ current_user.nickname }} | Review Date: {{ review.review_date.strftime('%m-%d-%y') }} | Rating: {{ review.rating }}</p>
+                <p>Review Date: {{ review.review_date.strftime('%m-%d-%y') }} | Rating: {{ review.rating }}</p>
                 <p>Comment: {{ review.comment }}</p>
 
                 {% if review.reviewer_id == current_user.user_id %}
@@ -53,7 +57,7 @@
                         <input type="submit" value="Delete">
                     </form>
                 {% endif %}
-                
+
                 <br>
             {% endfor %}
         </article>

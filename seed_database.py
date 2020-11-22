@@ -27,9 +27,7 @@ with open('data/users.json') as u:
 for user in user_data:
 
     nickname = user['nickname']
-    # print('nickname=', nickname)
     email = user['email']
-    # print('email=', email)
     password = user['password']
     zipcode = user['zipcode']
     intro = user['intro']
@@ -48,7 +46,6 @@ for share in share_data:
     share_name = share['share_name']
     made_date = datetime.strptime(share['made_date'], '%m-%d-%y')
     description = share['description']
-    # zipcode = share['zipcode']
     jar_status = share['jar_status']
     user_id = share['user_id'] 
 
@@ -68,6 +65,6 @@ for review in review_data:
     review_date = datetime.strptime(review['review_date'], '%m-%d-%y')
     comment = review['comment']
     reviewer_id = review['reviewer_id']
-    reviewee_id = review['reviewee_id']
+    maker_id = review['maker_id']
 
-    crud.create_review(rating, review_date, comment, reviewer_id, reviewee_id)
+    crud.create_review(rating, review_date, comment, reviewer_id, maker_id)

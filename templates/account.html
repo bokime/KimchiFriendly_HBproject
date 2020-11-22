@@ -25,17 +25,17 @@
                 {% endif %}
             </div>
             <div>
-                {{ form.password.label }}
-
-                {% if form.password.errors %}
-                    {{ form.password }}
+                {{ form.phone_number.label }}<br>
+                <!-- validation errors -->
+                {% if form.phone_number.errors %}
+                    {{ form.phone_number }}
                     <div>
-                        {% for error in form.password.errors %}
+                        {% for error in form.phone_number.errors %}
                             <span style="color: red;">{{ error }}</span>
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ form.password }}
+                    {{ form.phone_number }}
                 {% endif %}
             </div>
             <div>

@@ -4,159 +4,139 @@
 		"comment": "non massa non ante bibendum ullamcorper. Duis cursus, diam",
 		"review_date": "04-07-20",
 		"reviewer_id": 6,
-		"share_id": 9,
-		"reviewee_id": 7
+		"maker_id": 7
 	},
 	{
 		"rating": 2,
 		"comment": "luctus. Curabitur egestas nunc sed libero. Proin sed turpis nec mauris blandit mattis. Cras eget",
 		"review_date": "01-17-20",
 		"reviewer_id": 9,
-		"share_id": 1,
-		"reviewee_id": 6
+		"maker_id": 6
 	},
 	{
 		"rating": 5,
 		"comment": "Sed malesuada augue ut lacus. Nulla tincidunt, neque vitae semper egestas,",
 		"review_date": "10-17-20",
 		"reviewer_id": 6,
-		"share_id": 4,
-		"reviewee_id": 4
+		"maker_id": 4
 	},
 	{
 		"rating": 2,
 		"comment": "pretium et, rutrum non, hendrerit",
 		"review_date": "04-29-20",
 		"reviewer_id": 1,
-		"share_id": 3,
-		"reviewee_id": 2
+		"maker_id": 2
 	},
 	{
 		"rating": 2,
 		"comment": "senectus et netus et malesuada",
 		"review_date": "06-30-20",
 		"reviewer_id": 10,
-		"share_id": 1,
-		"reviewee_id": 3
+		"maker_id": 3
 	},
 	{
 		"rating": 4,
 		"comment": "dui. Cras pellentesque. Sed dictum. Proin eget odio. Aliquam vulputate ullamcorper magna. Sed eu eros. Nam consequat",
 		"review_date": "02-24-20",
 		"reviewer_id": 9,
-		"share_id": 8,
-		"reviewee_id": 2
+		"maker_id": 2
 	},
 	{
 		"rating": 5,
 		"comment": "massa lobortis ultrices. Vivamus rhoncus.",
 		"review_date": "11-20-19",
 		"reviewer_id": 8,
-		"share_id": 3,
-		"reviewee_id": 9
+		"maker_id": 9
 	},
 	{
 		"rating": 2,
 		"comment": "interdum. Sed auctor odio a purus. Duis",
 		"review_date": "07-13-20",
 		"reviewer_id": 10,
-		"share_id": 4,
-		"reviewee_id": 10
+		"maker_id": 10
 	},
 	{
 		"rating": 4,
 		"comment": "Sed eu nibh vulputate mauris sagittis placerat. Cras dictum ultricies",
 		"review_date": "09-07-20",
 		"reviewer_id": 4,
-		"share_id": 8,
-		"reviewee_id": 8
+		"maker_id": 8
 	},
 	{
 		"rating": 2,
 		"comment": "est, mollis non, cursus non, egestas a, dui. Cras pellentesque. Sed dictum. Proin",
 		"review_date": "10-30-20",
 		"reviewer_id": 5,
-		"share_id": 6,
-		"reviewee_id": 8
+		"maker_id": 8
 	},
 	{
 		"rating": 2,
 		"comment": "sem semper erat, in consectetuer ipsum nunc id enim. Curabitur",
 		"review_date": "04-22-20",
 		"reviewer_id": 2,
-		"share_id": 10,
-		"reviewee_id": 7
+		"maker_id": 7
 	},
 	{
 		"rating": 2,
 		"comment": "sem. Pellentesque ut ipsum ac mi eleifend egestas. Sed pharetra, felis eget varius ultrices, mauris ipsum",
 		"review_date": "02-19-20",
 		"reviewer_id": 3,
-		"share_id": 4,
-		"reviewee_id": 8
+		"maker_id": 8
 	},
 	{
 		"rating": 5,
 		"comment": "lacus. Cras interdum. Nunc sollicitudin commodo ipsum. Suspendisse non leo. Vivamus nibh",
 		"review_date": "08-01-20",
 		"reviewer_id": 9,
-		"share_id": 4,
-		"reviewee_id": 6
+		"maker_id": 6
 	},
 	{
 		"rating": 4,
 		"comment": "magna. Ut tincidunt orci quis lectus. Nullam suscipit, est ac facilisis facilisis, magna tellus faucibus",
 		"review_date": "05-18-20",
 		"reviewer_id": 10,
-		"share_id": 3,
-		"reviewee_id": 10
+		"maker_id": 10
 	},
 	{
 		"rating": 5,
 		"comment": "orci luctus et ultrices posuere cubilia Curae; Phasellus ornare. Fusce mollis.",
 		"review_date": "01-03-20",
 		"reviewer_id": 1,
-		"share_id": 7,
-		"reviewee_id": 2
+		"maker_id": 2
 	},
 	{
 		"rating": 5,
 		"comment": "odio. Etiam ligula tortor, dictum eu, placerat eget, venenatis a,",
 		"review_date": "10-28-20",
 		"reviewer_id": 5,
-		"share_id": 8,
-		"reviewee_id": 9
+		"maker_id": 9
 	},
 	{
 		"rating": 2,
 		"comment": "sagittis lobortis mauris. Suspendisse aliquet molestie tellus. Aenean egestas hendrerit neque. In",
 		"review_date": "02-07-20",
 		"reviewer_id": 9,
-		"share_id": 2,
-		"reviewee_id": 4
+		"maker_id": 4
 	},
 	{
 		"rating": 4,
 		"comment": "mauris elit, dictum eu, eleifend nec, malesuada ut, sem. Nulla interdum. Curabitur dictum. Phasellus in felis. Nulla",
 		"review_date": "10-03-20",
 		"reviewer_id": 3,
-		"share_id": 9,
-		"reviewee_id": 5
+		"maker_id": 5
 	},
 	{
 		"rating": 4,
 		"comment": "tempus scelerisque, lorem ipsum sodales purus, in molestie tortor nibh sit amet orci. Ut",
 		"review_date": "07-18-20",
 		"reviewer_id": 9,
-		"share_id": 8,
-		"reviewee_id": 9
+		"maker_id": 9
 	},
 	{
 		"rating": 5,
 		"comment": "Nam consequat dolor vitae dolor. Donec fringilla. Donec feugiat metus sit amet ante. Vivamus non lorem vitae odio sagittis",
 		"review_date": "06-26-20",
 		"reviewer_id": 3,
-		"share_id": 2,
-		"reviewee_id": 5
+		"maker_id": 5
 	}
 ]

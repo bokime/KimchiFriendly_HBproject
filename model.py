@@ -66,10 +66,8 @@ class Review(db.Model):
     reviewer_id = db.Column(db.Integer, nullable=False)
 
     maker_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    # share_id = db.Column(db.Integer, db.ForeignKey('shares.share_id'), nullable=False)
 
     user = db.relationship('User', backref='reviews')
-    # share = db.relationship('Share', backref='reviews')
 
     def __repr__(self):
         return f'<Review review_id={self.review_id} reviewer_id={self.reviewer_id} maker_id={self.maker_id}>'        

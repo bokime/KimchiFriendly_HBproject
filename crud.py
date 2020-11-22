@@ -107,8 +107,10 @@ def get_shares_by_user_id(user_id):
     return db.session.query(Share).join(User).filter(User.user_id == user_id).all() 
 
 
-def get_review_by_nickname(nickname):
-    return db.session.query(Review).join(User).filter(User.nickname == nickname).all()
+def get_reviews_by_user_id(user_id):
+    """  """ 
+
+    return db.session.query(Review).join(User).filter(User.user_id == user_id).all()    
 
 
 if __name__ == '__main__':

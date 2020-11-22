@@ -1,4 +1,21 @@
-*{
+#share_detail tr {
+    display: none;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* *{
     margin: 0;
     padding: 0;
 }
@@ -38,4 +55,9 @@
     color: #c59b08;
 }
 
-/* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */
+Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */
+
+
+
+
+

@@ -10,7 +10,7 @@ from flask_login import LoginManager, login_user, current_user, logout_user, log
 
 from jinja2 import StrictUndefined
 from model import db, User, Share, Review, connect_to_db
-from twilio.rest import Client
+# from twilio.rest import Client
 
 
 app = Flask(__name__)
@@ -38,7 +38,7 @@ def home():
     """ Home page showing posted jar shares """
 
     page = request.args.get('page', 1, type=int)
-    shares = Share.query.order_by(Share.made_date.desc()).paginate(page=page, per_page=5) 
+    shares = Share.query.order_by(Share.made_date.desc()).paginate(page=page, per_page=4) 
     # shares = crud.get_shares()
     return render_template('home.html', shares=shares, title='Welcome')
 
@@ -118,7 +118,6 @@ def account():
     if form.validate_on_submit():
         current_user.nickname = form.nickname.data
         current_user.phone_number = form.phone_number.data
-        current_user.password = form.password.data
         current_user.zipcode = form.zipcode.data
         current_user.intro = form.intro.data
 
@@ -130,7 +129,6 @@ def account():
     elif request.method == 'GET':
         form.nickname.data = current_user.nickname
         form.phone_number.data = current_user.phone_number
-        form.password.data = current_user.password
         form.zipcode.data = current_user.zipcode
         form.intro.data = current_user.intro
 
@@ -246,19 +244,18 @@ def user_shares(nickname):
 
     user = User.query.filter_by(nickname=nickname).first_or_404()
     # page = request.args.get('page', 1, type=int)
+    # get_review = crud.get_reviews_by_user_id(user_id=user.user_id)
     shares = crud.get_shares_by_nickname(nickname)
 
     return render_template('user_profile.html', shares=shares, user=user)   
 
 
+###### reviwer's nickname has to be passed
 ## creating review    
-@app.route('/user/<nickname>', methods=['GET','POST'])
+@app.route('/user/<nickname>', methods=['POST'])
 @login_required
 def user_review(nickname): 
     """ add new Kimchi maker review """
-
-    if request.method == 'GET':
-        return render_template('user_profile.html')
 
     if request.method == 'POST':
 
@@ -268,16 +265,17 @@ def user_review(nickname):
         maker_id = request.form.get('maker_id')
         reviewer_id = session['user_id']
 
-        review = crud.create_review(rating, review_date,
+        make_review = crud.create_review(rating, review_date,
                                     comment, reviewer_id, maker_id)
         
-        db.session.add(review)
+        db.session.add(make_review)
         db.session.commit()
 
         flash('Your review has been submitted!', 'success')
     return redirect(f'/user/{nickname}')
 
 
+###### redirect(/user/<nickname>)
 ## Deleting review
 @app.route('/user/<review_id>/delete', methods=['POST'])
 @login_required
@@ -291,6 +289,8 @@ def delete_review(review_id):
     
     flash('Your review has been deleted.', 'sucess')
     return redirect('/')
+
+
 
 
 if __name__ == '__main__':

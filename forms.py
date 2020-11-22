@@ -45,8 +45,8 @@ class UpdateAccount(FlaskForm):
     """ update account form """
 
     nickname = StringField('Nickname', validators=[DataRequired(), Length(min=2, max=20)])
-
-    password = StringField('Password')
+    phone_number = StringField('phone_number')
+    # password = StringField('Password')
     zipcode = StringField('Zipcode')
     intro = TextAreaField('About')
     submit = SubmitField('Update')
