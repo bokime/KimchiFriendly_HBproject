@@ -1,8 +1,25 @@
-$('#request-btn').on('click', () => {
+$('#request-btn').on('click', (evt) => {
+    evt.preventDefault();
+
+    console.log(evt.target)
+
+    const url = $('#url_for_sender_request').val()
+    console.log(url)
+
+    const maker_id = $('#maker_id').val()
+    console.log(maker_id)
     
+    $.get(url, {maker_id:maker_id}, (res) => {
+        console.log(res)
+    })
+
     alert('Your request has been sent!')
-    //run send_sms.py
+
 })
+
+
+
+
 
 
 

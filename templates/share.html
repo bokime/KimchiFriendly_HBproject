@@ -24,7 +24,9 @@
     {% else %}
         <br>
         <p>Wanna try {{ share.user.nickname }}'s Kimchi Share?</p>
-            <form action="{{ url_for('send_request', sender=current_user.nickname, maker=share.user.nickname) }}" method="GET">
+            <form>
+                <input type="hidden" id= "url_for_sender_request" value="{{ url_for('send_request', sender=current_user.nickname, maker=share.user.nickname) }}">
+                <input type="hidden" id= "maker_id" value="{{ share.user_id }}">
                 <input type="submit" id="request-btn" value="Request">
             </form>
         <br>

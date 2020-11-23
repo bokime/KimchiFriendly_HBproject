@@ -292,13 +292,16 @@ def delete_review(review_id):
     flash('Your review has been deleted.', 'success')
     return redirect(url_for('user_shares', user_id=delete_review.maker_id))
 
+
 ### Twilio SMS ###
 @app.route('/sms', methods=['GET'])
 def send_request():
     """ send message to request Kimchi jar share """
-
+    
     sender = current_user.nickname
-    maker = crud.get_first_share_by_nickname(nickname=User.nickname)
+    maker_id = request.args.get('maker_id')
+    # maker = crud.get_shares_by_nickname(nickname=User.nickname)
+    maker = crud.load_user(maker_id).nickname
     
     sender_number = twilio_number
     maker_number = my_number
@@ -310,8 +313,7 @@ def send_request():
                         to=maker_number
                         )
     print(message.sid)
-    return Response(status = 200)
-    # return redirect(url_for('share', share=share))
+    return "success"
 
 
 

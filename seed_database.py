@@ -19,7 +19,6 @@ model.db.create_all()
 
 
 """ seed dummy user data """
-
 with open('data/users.json') as u:
     user_data = json.loads(u.read())
 
@@ -37,7 +36,6 @@ for user in user_data:
 
 
 """ seed dummy jar share data """
-
 with open('data/shares.json') as f:
     share_data = json.loads(f.read())
 
@@ -55,7 +53,6 @@ for share in share_data:
 
 
 """ seed dummy review data """
-
 with open('data/reviews.json') as r:
     review_data = json.loads(r.read())
 
