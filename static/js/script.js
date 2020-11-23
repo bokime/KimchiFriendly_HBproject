@@ -1,16 +1,13 @@
 $('#request-btn').on('click', () => {
     
-    $.ajax({
-        url: "/KimchiFriendly/send_sms.py",
-        success: function(response) {
-            alert('Your request has been sent!')
-        }
-    })
-    // alert('Your request has been sent!')
+    alert('Your request has been sent!')
     //run send_sms.py
 })
 
 
+
+////////////
+////////////
 // pagination
 // $(document).ready(function(){
 //     $('#share-detail').after('<div id="nav"></div>');
@@ -36,22 +33,7 @@ $('#request-btn').on('click', () => {
 //     });
 // });
 
-// //OR
-// $.ajax({
-//     url: "/KimchiFriendly/send_sms.py",
-//     success: function(response) {
-//         alert('Your request has been sent!')
-//     }
-// })
 
-// function goPython(){
-//     $.ajax({
-//         url: "/send_sms.py",
-//         context: document.body
-//     }).done(function() {
-//         alert('finished python script');;
-//     });
-// }
 
 // $('#review-form').on('submit', (evt) => {
 //     evt.preventDefault();

@@ -1,8 +1,9 @@
 """Server for Kimchi Friendly app."""
 import os
 import crud
+# import send_sms.py
 
-from flask import Flask, render_template, redirect, request, flash, session, url_for
+from flask import Flask, render_template, redirect, request, flash, session, url_for, Response
 from model import connect_to_db
 from forms import Registration, Login, UpdateAccount, NewShare, Review
 from flask_bcrypt import Bcrypt
@@ -10,18 +11,24 @@ from flask_login import LoginManager, login_user, current_user, logout_user, log
 
 from jinja2 import StrictUndefined
 from model import db, User, Share, Review, connect_to_db
-# from twilio.rest import Client
+
+from twilio.rest import Client
+# from twilio import twiml
 
 
 app = Flask(__name__)
 
-app.secret_key = '4e5f639c46265c31'
-# app.config["SECRET_KEY"] = os.getenv("appkey")
 app.jinja_env.undefined = StrictUndefined
 bcrypt = Bcrypt(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
+
+app.config["SECRET_KEY"] = os.environ.get("appkey")
+account_sid = os.environ['TWILIO_ACCOUNT_SID']
+auth_token = os.environ['TWILIO_AUTH_TOKEN']
+my_number = os.environ['MY_NUMBER']
+twilio_number = os.environ['TEST_NUMBER']
 
 
 @login_manager.user_loader
@@ -83,7 +90,7 @@ def login():
 
     form = Login()
     if form.validate_on_submit():
-        # get user by email
+        # get user by email from data
         user = User.query.filter_by(email=form.email.data).first()
 
         if user and bcrypt.check_password_hash(user.password, form.password.data):
@@ -284,6 +291,28 @@ def delete_review(review_id):
     
     flash('Your review has been deleted.', 'success')
     return redirect(url_for('user_shares', user_id=delete_review.maker_id))
+
+### Twilio SMS ###
+@app.route('/sms', methods=['GET'])
+def send_request():
+    """ send message to request Kimchi jar share """
+
+    sender = current_user.nickname
+    maker = crud.get_first_share_by_nickname(nickname=User.nickname)
+    
+    sender_number = twilio_number
+    maker_number = my_number
+
+    client = Client(account_sid, auth_token)
+    message = client.messages.create(
+                        body=f"Hi {maker}, {sender} is interested in your Kimchi jar! Care to share? If you'd like to share, text them back at {sender_number}.",
+                        from_=sender_number,
+                        to=maker_number
+                        )
+    print(message.sid)
+    return Response(status = 200)
+    # return redirect(url_for('share', share=share))
+
 
 
     

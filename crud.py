@@ -100,6 +100,10 @@ def get_shares_by_nickname(nickname):
 
     return db.session.query(Share).join(User).filter(User.nickname == nickname).all()     
 
+def get_first_share_by_nickname(nickname):
+    """  """ 
+    return db.session.query(Share).join(User).filter(User.nickname == nickname).first() 
+
 
 def get_shares_by_user_id(user_id):
     """ query user nickname from User obj for Share (Left Join) """ 

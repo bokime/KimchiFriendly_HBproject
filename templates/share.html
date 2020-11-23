@@ -7,7 +7,7 @@
         <div>
             <h2>{{ share.share_name }}</h2>
             <div>
-                <p>Kimchi Maker: <a href="{{ url_for('user_shares', nickname=share.user.nickname) }}">{{ share.user.nickname }}</a>  **review stars**</p>
+                <p>Kimchi Maker: <a href="{{ url_for('user_shares', user_id=share.user.user_id) }}">{{ share.user.nickname }}</a>  **review stars placement**</p>
                 <p>Made on {{ share.made_date.strftime('%m-%d-%y') }}</p>
                 <p>Kimchi Status: {{ share.jar_status }}</p>
             </div>
@@ -23,7 +23,10 @@
         </form>
     {% else %}
         <br>
-        <p>Wanna try {{ share.user.nickname }}'s Kimchi Share? <input id="request-btn" type="submit" value="Request"> </p>
+        <p>Wanna try {{ share.user.nickname }}'s Kimchi Share?</p>
+            <form action="{{ url_for('send_request', sender=current_user.nickname, maker=share.user.nickname) }}" method="GET">
+                <input type="submit" id="request-btn" value="Request">
+            </form>
         <br>
     {% endif %}
 
