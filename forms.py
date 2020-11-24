@@ -10,13 +10,11 @@ from model import User, Share, Review
 class Registration(FlaskForm):
     """ register new user """
     
-    nickname = StringField('Nickname',
-                            validators=[DataRequired(), Length(min=5, max=20)])
+    nickname = StringField('Nickname', validators=[DataRequired(), Length(min=5, max=20)])
     email = StringField('Email', validators=[DataRequired(), Email()])
     phone_number = StringField('phone_number')
     password = PasswordField('Password', validators=[DataRequired()])
-    confirm_password = PasswordField('Confirm Password',
-                                        validators=[DataRequired(), EqualTo('password')])
+    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
     zipcode = StringField('Zipcode', validators=[DataRequired(), Length(min=3, max=10)])  
     intro = TextAreaField('About')                                  
     submit = SubmitField('Sign Up')
@@ -46,7 +44,7 @@ class UpdateAccount(FlaskForm):
 
     nickname = StringField('Nickname', validators=[DataRequired(), Length(min=2, max=20)])
     phone_number = StringField('phone_number')
-    # password = StringField('Password')
+    password = PasswordField('Password')
     zipcode = StringField('Zipcode')
     intro = TextAreaField('About')
     submit = SubmitField('Update')
@@ -67,13 +65,3 @@ class NewShare(FlaskForm):
     jar_status = SelectField('Status', choices= ['Fermenting','Ready for Sharing','Sold'])
     # image = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])                                            
     submit = SubmitField('Submit')
-
-
-# class Review(FlaskForm):
-#     """ Share review """
-
-#     rating = SelectField('Kimchi Rating', validators=[DataRequired()],
-#                         choices=[0,1,2,3,4,5,6,7,8,9,10])
-#     review_date = DateField('Review Date', format='%m-%d-%y', validators=[DataRequired()])
-#     comment = TextAreaField('How was your Kimchi sharing?', Length(max=300))
-#     submit = SubmitField('Submit')

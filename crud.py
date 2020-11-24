@@ -36,6 +36,7 @@ def create_share(share_name, made_date, description, jar_status, user_id):
     return share
 ### test example: share1=create_share('napa cabbage kimchi', '05-23-19', 'very spicy and tangy! so good!', 'sold', '2')  
 
+
 def create_review(rating, review_date, comment, reviewer_id, maker_id):
     """ create a new review """
 
@@ -53,68 +54,56 @@ def create_review(rating, review_date, comment, reviewer_id, maker_id):
     return review
 # review1 = create_review('7', '11-18-20', 'it was great!', user3.user_id, user2.user_id)
 
-# def create_review(rating, review_date, comment):
-    
-#     """ create a new review """
 
-#     review = Review(
-#                     rating=rating,
-#                     review_date=review_date,
-#                     comment=comment
-#                     )
-
-#     db.session.add(review)
-#     db.session.commit()
-
-#     return review
-
+###
 def load_user(user_id):
     """ return a user by primary key """
 
     return User.query.get(int(user_id))
 
 
-#####
+###
 def get_shares():
     """ return all jar shares """
 
     return Share.query.all()
 
 
-def get_share_by_id(share_id):
-    """ return a share by primary key """
+# def get_share_by_id(share_id):
+#     """ return a share by primary key """
 
-    return Share.query.get(share_id)    
+#     return Share.query.get(share_id)    
 
 
-#####
+###
 def get_shares_by_zipcode(zipcode):
     """ query user zipcode from User obj for Share (Left Join) """ 
 
     return db.session.query(Share).join(User).filter(User.zipcode == zipcode).all() 
 
 
-#####
-def get_shares_by_nickname(nickname):
-    """ query user nickname from User obj for Share (Left Join) """ 
 
-    return db.session.query(Share).join(User).filter(User.nickname == nickname).all()     
+# def get_shares_by_nickname(nickname):
+#     """ query user nickname from User obj for Share (Left Join) """ 
 
-def get_first_share_by_nickname(nickname):
-    """  """ 
-    return db.session.query(Share).join(User).filter(User.nickname == nickname).first() 
+#     return db.session.query(Share).join(User).filter(User.nickname == nickname).all()     
+
+# def get_first_share_by_nickname(nickname):
+#     """  """ 
+#     return db.session.query(Share).join(User).filter(User.nickname == nickname).first() 
 
 
+###
 def get_shares_by_user_id(user_id):
     """ query user nickname from User obj for Share (Left Join) """ 
 
     return db.session.query(Share).join(User).filter(User.user_id == user_id).all() 
 
 
-def get_reviews_by_user_id(user_id):
-    """  """ 
+# def get_reviews_by_user_id(user_id):
+#     """  """ 
 
-    return db.session.query(Review).join(User).filter(User.user_id == user_id).all()    
+#     return db.session.query(Review).join(User).filter(User.user_id == user_id).all()    
 
 
 if __name__ == '__main__':

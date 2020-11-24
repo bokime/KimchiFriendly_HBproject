@@ -1,88 +1,126 @@
 {% extends 'base.html' %}
+
 {% block content %}
     <br>
-    <h1>Register</h1>
+    <h1>Create an account</h1>
     <br>
-    <form action="" method="POST">
-        {{ form.hidden_tag() }}
-            <p>
-                {{ form.nickname.label }}
+    <form action="" method="POST"> <!--action="" will send back to the route-->
+        {{ form.hidden_tag() }}  <!--hidden_tag() method adds a CSRF token-->
+        <fieldset>
+            <div class="form-row">
+                {{ form.nickname.label }}				
                 {% if form.nickname.errors %}
+                <div class="input-error">
+                    {% for error in form.nickname.errors %}
                     {{ form.nickname }}
-                        {% for error in form.nickname.errors %}
-                            <span style="color: red;">{{ error }}</span>
-                        {% endfor %}
+                    <span class="error-message" style="color:red; font-size: small">
+                    {{ error }}
+                    </span>
+                    {% endfor %}
+                </div>
                 {% else %}
                     {{ form.nickname }}
                 {% endif %}
-            </p>
-            <p>
-                {{ form.email.label }}
+            </div>
+            <br>
+            <div class="form-row">
+                {{ form.email.label }}				
                 {% if form.email.errors %}
+                <div class="input-error">
+                    {% for error in form.email.errors %}
                     {{ form.email }}
-                        {% for error in form.email.errors %}
-                            <span style="color: red;">{{ error }}</span>
-                        {% endfor %}
+                    <span class="error-message" style="color:red; font-size: small">
+                    {{ error }}
+                    </span>
+                    {% endfor %}
+                </div>
                 {% else %}
                     {{ form.email }}
                 {% endif %}
-            </p>
-            <p>
-                {{ form.phone_number.label }}
+            </div>
+            <br>
+            <div class="form-row">
+                {{ form.phone_number.label }}				
                 {% if form.phone_number.errors %}
+                <div class="input-error">
+                    {% for error in form.phone_number.errors %}
                     {{ form.phone_number }}
-                        {% for error in form.phone_number.errors %}
-                            <span style="color: red;">{{ error }}</span>
-                        {% endfor %}
+                    <span class="error-message" style="color:red; font-size: small">
+                    {{ error }}
+                    </span>
+                    {% endfor %}
+                </div>
                 {% else %}
-                    {{ form.phone_number }}
+                    {{ form.phone_number(placeholder="+12223334444") }}
                 {% endif %}
-            </p>
-            <p>
-                {{ form.password.label }}
+            </div>
+            <br>
+            <div class="form-row">
+                {{ form.password.label }}				
                 {% if form.password.errors %}
+                <div class="input-error">
+                    {% for error in form.password.errors %}
                     {{ form.password }}
-                        {% for error in form.password.errors %}
-                            <span style="color: red;">{{ error }}</span>
-                        {% endfor %}
+                    <span class="error-message" style="color:red; font-size: small">
+                    {{ error }}
+                    </span>
+                    {% endfor %}
+                </div>
                 {% else %}
                     {{ form.password }}
                 {% endif %}
-            </p>
-            <p>
-                {{ form.confirm_password.label }}
+            </div>
+            <br>
+            <div class="form-row">
+                {{ form.confirm_password.label }}				
                 {% if form.confirm_password.errors %}
+                <div class="input-error">
+                    {% for error in form.confirm_password.errors %}
                     {{ form.confirm_password }}
-                        {% for error in form.confirm_password.errors %}
-                            <span style="color: red;">{{ error }}</span>
-                        {% endfor %}
+                    <span class="error-message" style="color:red; font-size: small">
+                    {{ error }}
+                    </span>
+                    {% endfor %}
+                </div>
                 {% else %}
                     {{ form.confirm_password }}
                 {% endif %}
-            </p>
-            <p>
-                {{ form.zipcode.label }}
+            </div>
+            <br>
+            <div class="form-row">
+                {{ form.zipcode.label }}				
                 {% if form.zipcode.errors %}
+                <div class="input-error">
+                    {% for error in form.zipcode.errors %}
                     {{ form.zipcode }}
-                        {% for error in form.zipcode.errors %}
-                            <span style="color: red;">{{ error }}</span>
-                        {% endfor %}
+                    <span class="error-message" style="color:red; font-size: small">
+                    {{ error }}
+                    </span>
+                    {% endfor %}
+                </div>
                 {% else %}
                     {{ form.zipcode }}
                 {% endif %}
-            </p>
-            <p>
-                {{ form.intro.label }}
+            </div>
+            <br>
+            <div class="form-row">
+                {{ form.intro.label }}				
                 {% if form.intro.errors %}
+                <div class="input-error">
+                    {% for error in form.intro.errors %}
                     {{ form.intro }}
-                        {% for error in form.intro.errors %}
-                            <span style="color: red;">{{ error }}</span>
-                        {% endfor %}
+                    <span class="error-message" style="color:red; font-size: small">
+                    {{ error }}
+                    </span>
+                    {% endfor %}
+                </div>
                 {% else %}
                     {{ form.intro }}
                 {% endif %}
-            </p>
-            <p>{{ form.submit() }}</p>
+            </div>
+            <br>
+        </fieldset>
+        <p>{{ form.submit() }}</p>
         <small>
             Already Have An Account? <a href="{{ url_for('login') }}">Sign In</a>
         </small>

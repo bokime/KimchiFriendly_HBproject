@@ -4,10 +4,10 @@ $('#request-btn').on('click', (evt) => {
     console.log(evt.target)
 
     const url = $('#url_for_sender_request').val()
-    console.log(url)
+        console.log(url)
 
     const maker_id = $('#maker_id').val()
-    console.log(maker_id)
+        console.log(maker_id)
     
     $.get(url, {maker_id:maker_id}, (res) => {
         console.log(res)
@@ -20,11 +20,6 @@ $('#request-btn').on('click', (evt) => {
 
 
 
-
-
-
-////////////
-////////////
 // pagination
 // $(document).ready(function(){
 //     $('#share-detail').after('<div id="nav"></div>');

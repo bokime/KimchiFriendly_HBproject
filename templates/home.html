@@ -3,10 +3,10 @@
 {% block content %}
     {% if current_user.is_authenticated %}
         <br>
-        <h5>Hello, {{ current_user.nickname }}! Let's make and share some Kimchi!</h5>
+        <h3>Hello, {{ current_user.nickname }}! Let's make and share some Kimchi!</h3>
         <br>
         <form action="/home" method="POST">
-            <p>zipcode: <input type="text" name="zipcode"> <input type="submit"></p>
+            <h5>Find Kimchi Jar Shares in your area: <input type="text" name="zipcode" placeholder="zipcode"> <input type="submit"></h5>
         </form>
         {% else %}
         <br>
@@ -25,7 +25,7 @@
                 <h2><a href="{{ url_for('share', share_id=share.share_id) }}">{{ share.share_name }}</a></h2>
                 <div>
                     <a href="{{ url_for('user_shares', user_id=share.user.user_id) }}">{{ share.user.nickname }}</a>
-                    <small >{{ share.made_date.strftime('%m-%d-%y') }}</small>
+                    <p>Made on {{ share.made_date.strftime('%m-%d-%y') }} | Jar Sharing Status: {{ share.jar_status }}</p>
                 </div>
                 <p>{{ share.description }}</p>
             </div>

@@ -1,19 +1,15 @@
 """Server for Kimchi Friendly app."""
 import os
 import crud
-# import send_sms.py
 
-from flask import Flask, render_template, redirect, request, flash, session, url_for, Response
+from flask import Flask, render_template, redirect, request, flash, session, url_for, jsonify
 from model import connect_to_db
 from forms import Registration, Login, UpdateAccount, NewShare, Review
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
-
 from jinja2 import StrictUndefined
 from model import db, User, Share, Review, connect_to_db
-
 from twilio.rest import Client
-# from twilio import twiml
 
 
 app = Flask(__name__)
@@ -25,10 +21,13 @@ login_manager.init_app(app)
 login_manager.login_view = "login"
 
 app.config["SECRET_KEY"] = os.environ.get("appkey")
+
+# Twilio Account info
 account_sid = os.environ['TWILIO_ACCOUNT_SID']
 auth_token = os.environ['TWILIO_AUTH_TOKEN']
 my_number = os.environ['MY_NUMBER']
 twilio_number = os.environ['TEST_NUMBER']
+
 
 
 @login_manager.user_loader
@@ -63,12 +62,14 @@ def register():
     if form.validate_on_submit():
 
         pw_hash = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
-        user = User(nickname=form.nickname.data,
+        user = User(
+                    nickname=form.nickname.data,
                     email=form.email.data,
                     phone_number=form.phone_number.data,
                     password=pw_hash,
                     zipcode=form.zipcode.data,
-                    intro=form.intro.data)
+                    intro=form.intro.data
+                    )
 
         db.session.add(user)
         db.session.commit()
@@ -223,6 +224,7 @@ def update_share(share_id):
     return render_template('new_share.html', title='Update Jar Share', form=form, legend='Update Jar Share')
 
 
+
 @app.route('/home/<share_id>/delete', methods=['POST'])
 @login_required
 def delete_share(share_id):
@@ -293,14 +295,13 @@ def delete_review(review_id):
     return redirect(url_for('user_shares', user_id=delete_review.maker_id))
 
 
-### Twilio SMS ###
+
 @app.route('/sms', methods=['GET'])
 def send_request():
     """ send message to request Kimchi jar share """
     
     sender = current_user.nickname
     maker_id = request.args.get('maker_id')
-    # maker = crud.get_shares_by_nickname(nickname=User.nickname)
     maker = crud.load_user(maker_id).nickname
     
     sender_number = twilio_number
@@ -317,7 +318,6 @@ def send_request():
 
 
 
-    
 if __name__ == '__main__':
     connect_to_db(app)
     app.run(port=5000, host='0.0.0.0', debug=True)

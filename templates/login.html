@@ -2,38 +2,48 @@
 
 {% block content %}
     <br>
-    <h1>Sign In</h1>
+    <h1>Log In</h1>
     <br>
     <form action="" method="POST">
         {{ form.hidden_tag() }}
-        <!-- //template argument generates a hidden field that includes a token that is used to protect the form against CSRF attacks. All you need to do to have the form protected is include this hidden field and have the SECRET_KEY variable defined in the Flask configuration. -->
-        <p>
-            {{ form.email.label }}<br>
-            {% if form.email.errors %}
-                {{ form.email }}<br>
+        <!-- //template argument generates a hidden field that includes a token that is used to protect the form against CSRF attacks -->
+        <fieldset>
+            <div class="form-row">
+                {{ form.email.label }}				
+                {% if form.email.errors %}
+                <div class="input-error">
                     {% for error in form.email.errors %}
-                        <span style="color: red;">{{ error }}</span>
+                    {{ form.email }}
+                    <span class="error-message" style="color:red; font-size: small">
+                    {{ error }}
+                    </span>
                     {% endfor %}
-            {% else %}
-                {{ form.email }}
-            {% endif %}
-        </p>
-        <p>
-            {{ form.password.label }}<br>
-            {% if form.password.errors %}
-                {{ form.password }}<br>
+                </div>
+                {% else %}
+                    {{ form.email }}
+                {% endif %}
+            </div>
+            <br>
+            <div class="form-row">
+                {{ form.password.label }}				
+                {% if form.password.errors %}
+                <div class="input-error">
                     {% for error in form.password.errors %}
-                        <span style="color: red;">{{ error }}</span>
+                    {{ form.password }}
+                    <span class="error-message" style="color:red; font-size: small">
+                    {{ error }}
+                    </span>
                     {% endfor %}
-            {% else %}
-                {{ form.password }}
-            {% endif %}
-        </p>
-        <p>{{ form.remember() }} {{ form.remember.label }}</p>
+                </div>
+                {% else %}
+                    {{ form.password }}
+                {% endif %}
+            </div>
+            <br>
+        </fieldset>
         <p>{{ form.submit() }}</p>
-        <!-- <small><a href="#">Forgot Password?</a></small> -->
         <small>
-            Need An Account? <a href="{{ url_for('register') }}">Sign Up Now</a>
+            To Create an Account <a href="{{ url_for('register') }}">Sign Up Now</a>
         </small>
     </form>
 {% endblock content %}
