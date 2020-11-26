@@ -1,16 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container">
-    <br>
-    <br>
-    <br>
+
     <h2 class="account-heading">{{ current_user.nickname }}</h2>
     <p class="account-heading">{{ current_user.email }}</p>
     <form method="POST" action="" enctype="multipart/form-data">
         {{ form.hidden_tag() }}<!--hidden_tag() method adds a CSRF(Cross-Site Request Forgery) token-->
         <br>
-        <br>
-        <br>
+
         <fieldset class="form-group">
             <legend class="border-bottom mb-4">Account Info</legend>
             <div class="form-group">

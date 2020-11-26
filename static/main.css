@@ -21,22 +21,22 @@ form {
     margin: 0 auto; 
     width:400px;
 }
-.zipcode-form{
+/* .to-left-form{ */
     margin: 15px; 
     widows: 200px;
 }
 h1,h2,h3,h4,h5,h6{
-    font-family: 'Futura', sans-serif;
+    font-family: 'Futura';
 }
 p {
     font-size: 18px;
-    font-family: '', sans-serif;
+    font-family: 'Proxima Nova';
 }
 .card {
     margin: 30px;
     float: none;
     margin-bottom: 10px;
-    background-color: hsla(0, 0%, 100%, 0.6);
+    background-color: rgba(255, 255, 255, 0.6);
 }
 .container {
     max-width: 960px;
@@ -45,6 +45,9 @@ p {
     margin: 20px;
     float: none;
     margin-bottom: 10px;
+}
+.card-profile {
+    margin: 10px;
 }
 .display-3 {
     font-size: 4.5rem;
@@ -55,8 +58,11 @@ p {
     flex: 0 0 33.333333%;
     max-width: 33.333333%;
 }
+.zip {
+    margin: 20px;
+}
 :any-link {
-    color: #00934c;
+    color: #028546;
 }
 .navbar-default {
     background-color:#000000;
@@ -68,17 +74,23 @@ p {
 .navbar-nav .nav-link {
     color: #ffffff;
 }
-:any-link:hover { color: #f175fc; }
-
-
-
-
-
-
-/* *{
-    margin: 0;
-    padding: 0;
+:any-link:hover { 
+    color: #f175fc; 
 }
+.btn-dark {
+    background-color: rgb(0, 0, 0);
+    cursor:pointer;
+}
+.btn-dark:hover{
+    background: #f175fc;
+}
+.user-share{
+    margin-left: 15px;
+}
+
+
+
+/* 
 .rating {
     float: left;
     height: 46px;
