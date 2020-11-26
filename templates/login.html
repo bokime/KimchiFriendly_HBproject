@@ -1,49 +1,47 @@
 {% extends "base.html" %}
-
 {% block content %}
-    <br>
-    <h1>Log In</h1>
-    <br>
+<div class="container"></div>
     <form action="" method="POST">
         {{ form.hidden_tag() }}
         <!-- //template argument generates a hidden field that includes a token that is used to protect the form against CSRF attacks -->
-        <fieldset>
-            <div class="form-row">
-                {{ form.email.label }}				
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Log In</legend>
+            <div class="form-group">
+                {{ form.email.label }}<br>
+                <!-- validation errors -->
                 {% if form.email.errors %}
-                <div class="input-error">
-                    {% for error in form.email.errors %}
-                    {{ form.email }}
-                    <span class="error-message" style="color:red; font-size: small">
-                    {{ error }}
-                    </span>
-                    {% endfor %}
-                </div>
+                    {{ form.email(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-error">
+                        {% for error in form.email.errors %}
+                            <span style="color: #ff0000;">{{ error }}</span>
+                        {% endfor %}
+                    </div>
                 {% else %}
-                    {{ form.email }}
+                    {{ form.email(class="form-control form-control-md") }}
                 {% endif %}
             </div>
-            <br>
-            <div class="form-row">
-                {{ form.password.label }}				
+            <div class="form-group">
+                {{ form.password.label }}<br>
+                <!-- validation errors -->
                 {% if form.password.errors %}
-                <div class="input-error">
-                    {% for error in form.password.errors %}
-                    {{ form.password }}
-                    <span class="error-message" style="color:red; font-size: small">
-                    {{ error }}
-                    </span>
-                    {% endfor %}
-                </div>
+                    {{ form.password(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-error">
+                        {% for error in form.password.errors %}
+                            <span style="color: #ff0000;">{{ error }}</span>
+                        {% endfor %}
+                    </div>
                 {% else %}
-                    {{ form.password }}
+                    {{ form.password(class="form-control form-control-md") }}
                 {% endif %}
             </div>
-            <br>
         </fieldset>
-        <p>{{ form.submit() }}</p>
-        <small>
-            To Create an Account <a href="{{ url_for('register') }}">Sign Up Now</a>
-        </small>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-dark btn-sm")}}
+            <br>
+            <br>
+            <small>
+                To Create an Account <a href="{{ url_for('register') }}">Sign Up Now</a>
+            </small>
+        </div>
     </form>
 {% endblock content %}

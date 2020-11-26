@@ -1,3 +1,71 @@
+
+body {
+    background-color: #eeeeee;
+    color: #333333;
+    margin-top: 5rem;
+    height: 100%;
+    font-family: 'Futura', sans-serif;
+    text-align: left;
+    min-height: 75rem;
+    padding-top: 4.5rem;
+    background-image: url("/static/img/kimchi-jar-sq.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center top;
+    background-color: #e8d84b;
+}
+div {
+    display: block;
+}
+form { 
+    margin: 0 auto; 
+    width:400px;
+}
+h1,h2,h3,h4,h5,h6{
+    font-family: 'Futura', sans-serif;
+}
+p {
+    font-size: 18px;
+    font-family: '', sans-serif;
+}
+.container {
+    max-width: 960px;
+}
+.display-3 {
+    font-size: 4.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+.jumbotron {
+    background-color: transparent;
+}
+.col-md-4 {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+}
+
+:any-link {
+    color: #00a254;
+}
+.navbar-default {
+    background-color:#000000;
+}
+.navbar-brand {
+    color: #ffffff;
+    font-weight: bold;
+}
+.navbar-nav .nav-link {
+    color: #ffffff;
+}
+:any-link:hover { color: #f265ff; }
+
+
+
+
+
 /* *{
     margin: 0;
     padding: 0;

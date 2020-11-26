@@ -43,8 +43,8 @@ class UpdateAccount(FlaskForm):
     """ update account form """
 
     nickname = StringField('Nickname', validators=[DataRequired(), Length(min=2, max=20)])
-    phone_number = StringField('phone_number')
-    password = PasswordField('Password')
+    phone_number = StringField('Phone Number')
+    # password = PasswordField('Password')
     zipcode = StringField('Zipcode')
     intro = TextAreaField('About')
     submit = SubmitField('Update')
@@ -59,8 +59,8 @@ class UpdateAccount(FlaskForm):
 class NewShare(FlaskForm):
     """ new jar share form """
 
-    share_name = StringField('Title', validators=[DataRequired()])
-    made_date = DateField('When did you make?', format='%m-%d-%y')
+    share_name = StringField('Name of Kimchi Jar', validators=[DataRequired()])
+    made_date = DateField('Date you made', format='%m-%d-%y')
     description = TextAreaField('About This Kimchi', validators=[DataRequired()])
     jar_status = SelectField('Status', choices= ['Fermenting','Ready for Sharing','Sold'])
     # image = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])                                            

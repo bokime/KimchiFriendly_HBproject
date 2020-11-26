@@ -47,7 +47,6 @@ for share in share_data:
     jar_status = share['jar_status']
     user_id = share['user_id'] 
 
-
     crud.create_share(share_name, made_date, description, jar_status, user_id)
 
 

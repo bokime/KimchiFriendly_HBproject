@@ -1,98 +1,77 @@
 {% extends 'base.html' %}
 {% block content %}
-    
-    <div>
-        <h2>{{ current_user.nickname }}</h2>
-        <p>{{ current_user.email }}</p>
-    </div>
+<div class="container">
     <br>
-    <h1>Account Info</h1>
     <br>
-    <form method="POST" action="">
-        {{ form.hidden_tag() }} <!--hidden_tag() method adds a CSRF(Cross-Site Request Forgery) token-->
-        <fieldset>
-            <div class="form-row">
-                {{ form.nickname.label }}				
+    <br>
+    <h2 class="account-heading">{{ current_user.nickname }}</h2>
+    <p class="account-heading">{{ current_user.email }}</p>
+    <form method="POST" action="" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}<!--hidden_tag() method adds a CSRF(Cross-Site Request Forgery) token-->
+        <br>
+        <br>
+        <br>
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Account Info</legend>
+            <div class="form-group">
+                {{ form.nickname.label }}<br>
+                <!-- validation errors -->
                 {% if form.nickname.errors %}
-                <div class="input-error">
-                    {% for error in form.nickname.errors %}
-                    {{ form.nickname }}
-                    <span class="error-message" style="color:red; font-size: small">
-                    {{ error }}
-                    </span>
-                    {% endfor %}
-                </div>
+                    {{ form.nickname(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-error">
+                        {% for error in form.nickname.errors %}
+                            <span style="color: #ff0000;">{{ error }}</span>
+                        {% endfor %}
+                    </div>
                 {% else %}
-                    {{ form.nickname }}
+                    {{ form.nickname(class="form-control form-control-md") }}
                 {% endif %}
             </div>
-            <br>
-            <div class="form-row">
-                {{ form.phone_number.label }}				
+            <div class="form-group">
+                {{ form.phone_number.label }}<br>
+                <!-- validation errors -->
                 {% if form.phone_number.errors %}
-                <div class="input-error">
-                    {% for error in form.phone_number.errors %}
-                    {{ form.phone_number }}
-                    <span class="error-message" style="color:red; font-size: small">
-                    {{ error }}
-                    </span>
-                    {% endfor %}
-                </div>
+                    {{ form.phone_number(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-error">
+                        {% for error in form.phone_number.errors %}
+                            <span style="color: #ff0000;">{{ error }}</span>
+                        {% endfor %}
+                    </div>
                 {% else %}
-                    {{ form.phone_number(placeholder="+12223334444") }}
+                    {{ form.phone_number(placeholder="+12223334444", class="form-control form-control-md") }}
                 {% endif %}
             </div>
-            <br>
-            <div class="form-row">
-                {{ form.password.label }}				
-                {% if form.password.errors %}
-                <div class="input-error">
-                    {% for error in form.password.errors %}
-                    {{ form.password }}
-                    <span class="error-message" style="color:red; font-size: small">
-                    {{ error }}
-                    </span>
-                    {% endfor %}
-                </div>
-                {% else %}
-                    {{ form.password(type="password", placeholder="password") }}
-                {% endif %}
-            </div>
-            <br>
-            <div class="form-row">
-                {{ form.zipcode.label }}				
+            <div class="form-group">
+                {{ form.zipcode.label }}<br>
+                <!-- validation errors -->
                 {% if form.zipcode.errors %}
-                <div class="input-error">
-                    {% for error in form.zipcode.errors %}
-                    {{ form.zipcode }}
-                    <span class="error-message" style="color:red; font-size: small">
-                    {{ error }}
-                    </span>
-                    {% endfor %}
-                </div>
+                    {{ form.zipcode(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-error">
+                        {% for error in form.zipcode.errors %}
+                            <span style="color: #ff0000;">{{ error }}</span>
+                        {% endfor %}
+                    </div>
                 {% else %}
-                    {{ form.zipcode }}
+                    {{ form.zipcode(class="form-control form-control-md") }}
                 {% endif %}
             </div>
-            <br>
-            <div class="form-row">
-                {{ form.intro.label }}				
+            <div class="form-group">
+                {{ form.intro.label }}<br>
+                <!-- validation errors -->
                 {% if form.intro.errors %}
-                <div class="input-error">
-                    {% for error in form.intro.errors %}
-                    {{ form.intro }}
-                    <span class="error-message" style="color:red; font-size: small">
-                    {{ error }}
-                    </span>
-                    {% endfor %}
-                </div>
+                    {{ form.intro(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-error">
+                        {% for error in form.intro.errors %}
+                            <span style="color: #ff0000;">{{ error }}</span>
+                        {% endfor %}
+                    </div>
                 {% else %}
-                    {{ form.intro }}
+                    {{ form.intro(class="form-control form-control-md") }}
                 {% endif %}
-            </div>
-            <br>
         </fieldset>
-        <div>{{ form.submit }}</div>
+        <br>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-dark btn-sm")}}
+        </div>
     </form>
-
 {% endblock content %}
