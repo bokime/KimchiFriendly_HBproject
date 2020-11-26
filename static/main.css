@@ -2,7 +2,7 @@
 body {
     background-color: #eeeeee;
     color: #333333;
-    margin-top: 5rem;
+    margin-top: 3rem;
     height: 100%;
     font-family: 'Futura', sans-serif;
     text-align: left;
@@ -12,7 +12,7 @@ body {
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: center top;
-    background-color: #e8d84b;
+    background-color: #ffda08;
 }
 div {
     display: block;
@@ -21,6 +21,10 @@ form {
     margin: 0 auto; 
     width:400px;
 }
+.zipcode-form{
+    margin: 15px; 
+    widows: 200px;
+}
 h1,h2,h3,h4,h5,h6{
     font-family: 'Futura', sans-serif;
 }
@@ -28,27 +32,31 @@ p {
     font-size: 18px;
     font-family: '', sans-serif;
 }
+.card {
+    margin: 30px;
+    float: none;
+    margin-bottom: 10px;
+    background-color: hsla(0, 0%, 100%, 0.6);
+}
 .container {
     max-width: 960px;
+}
+.container-page {
+    margin: 20px;
+    float: none;
+    margin-bottom: 10px;
 }
 .display-3 {
     font-size: 4.5rem;
     font-weight: 300;
     line-height: 1.2;
 }
-*, ::after, ::before {
-    box-sizing: border-box;
-}
-.jumbotron {
-    background-color: transparent;
-}
 .col-md-4 {
     flex: 0 0 33.333333%;
     max-width: 33.333333%;
 }
-
 :any-link {
-    color: #00a254;
+    color: #00934c;
 }
 .navbar-default {
     background-color:#000000;
@@ -60,7 +68,8 @@ p {
 .navbar-nav .nav-link {
     color: #ffffff;
 }
-:any-link:hover { color: #f265ff; }
+:any-link:hover { color: #f175fc; }
+
 
 
 

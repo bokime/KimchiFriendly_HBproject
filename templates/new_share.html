@@ -7,7 +7,7 @@
         <br>
         <br>
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4"> {{ legend }} </legend>
+            <legend class="border-bottom mb-4">New Kimchi Jar Share</legend>
             <div class="form-group">
                 {{ form.share_name.label }}<br>
                 <!-- validation errors -->
@@ -22,7 +22,6 @@
                     {{ form.share_name(class="form-control form-control-md") }}
                 {% endif %}
             </div>
-            <br>
             <div class="form-group">
                 {{ form.made_date.label }}<br>
 
@@ -37,7 +36,6 @@
                     {{ form.made_date(placeholder="mm-dd-yy", class="form-control form-control-md") }}
                 {% endif %}
             </div>
-            <br>
             <div class="form-group">
                 {{ form.description.label }}<br>
                 <!-- validation errors -->
@@ -52,13 +50,11 @@
                     {{ form.description(class="form-control form-control-lg")}}
                 {% endif %}
             </div>
-            <br>
             <div class="form-group">
                 {{ form.jar_status.label }}
                 {{ form.jar_status(class="form-control form-control-md") }}
             </div>
         </fieldset>
-        <br>
         <div class="form-group">
             {{ form.submit(class="btn btn-dark btn-sm")}}
         </div>

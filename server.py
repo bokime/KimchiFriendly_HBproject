@@ -43,8 +43,8 @@ def load_user(user_id):
 def home():
     """ Home page showing posted jar shares """
 
-    page = request.args.get('page', 1, type=int)
-    shares = Share.query.order_by(Share.made_date.desc()).paginate(page=page, per_page=4) 
+    page = request.args.get('page', 1, type=int) #defalt page is 1 
+    shares = Share.query.order_by(Share.made_date.desc()).paginate(page=page, per_page=3) 
     # shares = crud.get_shares()
     return render_template('home.html', shares=shares, title='Welcome')
 
