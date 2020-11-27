@@ -5,7 +5,7 @@
         <div class="card-body">
             <h2 class="card-title">{{ share.share_name }}</h2>
             <hr>
-            <h6>kimchi maker: <a class="mr-2" href="{{ url_for('user_shares', user_id=share.user.user_id) }}">{{ share.user.nickname }}</a>  **STARS**</h6>
+            <h6>kimchi maker: <a class="mr-2" href="{{ url_for('user_shares', user_id=share.user.user_id) }}">{{ share.user.nickname }}</a></h6>
             <small class="text-muted"> made on {{ share.made_date.strftime('%m-%d-%y') }}  |  jar sharing status: {{ share.jar_status }}</small>
             <br><br>
             <small>notes from maker:</small><br><p class="card-text">{{ share.description }}</p>
@@ -13,9 +13,11 @@
         <!-- request jar sharing -->
         {% if share.user_id == current_user.user_id %}
         <div>
-            <a class="btn btn-dark btn-sm" href="{{ url_for('update_share', share_id=share.share_id) }}">update</a>
-            <form action="{{ url_for('delete_share', share_id=share.share_id) }}" method="POST">
-                <input class="btn btn-dark btn-sm" type="submit" value="delete">
+            <form class="to-left-form" action="{{ url_for('update_share', share_id=share.share_id) }}">
+                <input class="btn btn-dark btn-sm" type="submit" value="update">
+            </form>
+            <form class="to-left-form" action="{{ url_for('delete_share', share_id=share.share_id) }}" method="POST">
+                <input class="btn btn-dark btn-sm delete-bt" type="submit" value="delete">
             </form>
         </div>
         {% else %}
@@ -24,7 +26,7 @@
             <h6 class="card-title"> How fun! Wanna try {{ share.user.nickname }}'s awesome Kimchi?</h6>
             <h6 class="card-title">Click Request to send a message. {{ share.user.nickname }} will get back to you shortly!</h6>
             <form class="to-left-form">
-                <input class="btn btn-dark btn-sm" type="submit" id="request-btn" value="Request"/>
+                <input class="btn btn-dark btn-sm" type="submit" id="request-btn" value="request"/>
                 <!-- hidden inputs to pass "nickname", "share" -->
                 <input type="hidden" id= "url_for_sender_request" value="{{ url_for('send_request', sender=current_user.nickname, maker=share.user.nickname) }}">
                 <input type="hidden" id= "maker_id" value="{{ share.user_id }}">

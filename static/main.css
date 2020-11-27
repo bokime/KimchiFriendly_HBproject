@@ -12,7 +12,7 @@ body {
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: center top;
-    background-color: #ffda08;
+    background-color: #f8f3c9;
 }
 div {
     display: block;
@@ -21,7 +21,7 @@ form {
     margin: 0 auto; 
     width:400px;
 }
-/* .to-left-form{ */
+.to-left-form{
     margin: 15px; 
     widows: 200px;
 }
@@ -58,8 +58,14 @@ p {
     flex: 0 0 33.333333%;
     max-width: 33.333333%;
 }
-.zip {
-    margin: 20px;
+.zipcode-form {
+    margin: 15px;
+}
+.user-share{
+    margin-left: 15px;
+}
+.user-info{
+    margin-left: 5px;
 }
 :any-link {
     color: #028546;
@@ -84,10 +90,9 @@ p {
 .btn-dark:hover{
     background: #f175fc;
 }
-.user-share{
-    margin-left: 15px;
+#request-btn{
+    margin-left: -15px;
 }
-
 
 
 /* 

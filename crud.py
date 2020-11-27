@@ -69,10 +69,10 @@ def get_shares():
     return Share.query.all()
 
 
-# def get_share_by_id(share_id):
+# def get_review_by_maker(maker_id):
 #     """ return a share by primary key """
 
-#     return Share.query.get(share_id)    
+#     return Review.query.get(maker_id)    
 
 
 ###
@@ -82,28 +82,11 @@ def get_shares_by_zipcode(zipcode):
     return db.session.query(Share).join(User).filter(User.zipcode == zipcode).all() 
 
 
-
-# def get_shares_by_nickname(nickname):
-#     """ query user nickname from User obj for Share (Left Join) """ 
-
-#     return db.session.query(Share).join(User).filter(User.nickname == nickname).all()     
-
-# def get_first_share_by_nickname(nickname):
-#     """  """ 
-#     return db.session.query(Share).join(User).filter(User.nickname == nickname).first() 
-
-
 ###
 def get_shares_by_user_id(user_id):
     """ query user nickname from User obj for Share (Left Join) """ 
 
     return db.session.query(Share).join(User).filter(User.user_id == user_id).all() 
-
-
-# def get_reviews_by_user_id(user_id):
-#     """  """ 
-
-#     return db.session.query(Review).join(User).filter(User.user_id == user_id).all()    
 
 
 if __name__ == '__main__':
