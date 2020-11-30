@@ -54,13 +54,11 @@ def create_review(rating, review_date, comment, reviewer_id, maker_id):
     return review
 # review1 = create_review('7', '11-18-20', 'it was great!', user3.user_id, user2.user_id)
 
-
 ###
 def load_user(user_id):
     """ return a user by primary key """
 
     return User.query.get(int(user_id))
-
 
 ###
 def get_shares():
@@ -68,25 +66,17 @@ def get_shares():
 
     return Share.query.all()
 
-
-# def get_review_by_maker(maker_id):
-#     """ return a share by primary key """
-
-#     return Review.query.get(maker_id)    
-
-
 ###
 def get_shares_by_zipcode(zipcode):
     """ query user zipcode from User obj for Share (Left Join) """ 
 
-    return db.session.query(Share).join(User).filter(User.zipcode == zipcode).all() 
-
-
+    # return db.session.query(Share).join(User).filter(User.zipcode == zipcode).all() 
+    return db.session.query(Share).join(User).filter(User.zipcode == zipcode).order_by(Share.made_date.desc()) 
 ###
 def get_shares_by_user_id(user_id):
     """ query user nickname from User obj for Share (Left Join) """ 
 
-    return db.session.query(Share).join(User).filter(User.user_id == user_id).all() 
+    return db.session.query(Share).join(User).filter(User.user_id == user_id).all()  
 
 
 if __name__ == '__main__':

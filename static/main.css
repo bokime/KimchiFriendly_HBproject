@@ -25,8 +25,12 @@ form {
     margin: 15px; 
     widows: 200px;
 }
-h1,h2,h3,h4,h5,h6{
+h1,h2,h3,h4,h5 {
     font-family: 'Futura';
+}
+h6 {
+    font-family: 'Futura';
+    line-height: 180%;
 }
 p {
     font-size: 18px;
