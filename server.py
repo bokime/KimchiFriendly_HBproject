@@ -150,8 +150,6 @@ def account():
 def share_zipcode(): 
     """ show Kimchi shares in the user's input zipcode """
     
-    # page = request.args.get('page', 1, type=int) #defalt page is 1
-    # shares = db.session.query(Share).join(User).filter(User.zipcode == current_user.zipcode).order_by(Share.made_date.desc()).paginate(page=page, per_page=3)
     zipcode = request.form.get('zipcode')
     shares = crud.get_shares_by_zipcode(zipcode)
 
