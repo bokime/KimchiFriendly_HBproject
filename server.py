@@ -11,7 +11,6 @@ from jinja2 import StrictUndefined
 from model import db, User, Share, Review, connect_to_db
 from twilio.rest import Client
 
-
 app = Flask(__name__)
 
 app.jinja_env.undefined = StrictUndefined
@@ -29,7 +28,6 @@ my_number = os.environ['MY_NUMBER']
 twilio_number = os.environ['TEST_NUMBER']
 
 
-
 @login_manager.user_loader
 def load_user(user_id):
     """login manager to check current user"""
@@ -44,8 +42,8 @@ def home():
     """ Home page showing posted jar shares """
 
     page = request.args.get('page', 1, type=int) #defalt page is 1 
+    # pagination obj set up
     shares = Share.query.order_by(Share.made_date.desc()).paginate(page=page, per_page=3) 
-    # shares = crud.get_shares()
         
     return render_template('home.html', shares=shares, title='Welcome')
 
@@ -108,6 +106,7 @@ def login():
 
 
 @app.route('/logout')
+@login_required
 def logout():
     """ user logout """
 
@@ -183,6 +182,7 @@ def new_share():
 
 
 @app.route('/home/<share_id>')
+@login_required
 def share(share_id):
     """ show the detail of each Kimchi Jar Share """
 
