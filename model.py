@@ -23,14 +23,13 @@ class User(UserMixin, db.Model):
 
     share = db.relationship('Share', backref='users', lazy=True) 
     
-    """oderride the default properties of get_id()"""
+    """ Override the default properties of get_id() """
     def get_id(self):
         return (self.user_id)
         
     def __repr__(self):
         return f"""<User user_id={self.user_id} nickname={self.nickname} 
                 email={self.email} zipcode={self.zipcode}>"""
-
 
 
 class Share(db.Model):
@@ -43,7 +42,6 @@ class Share(db.Model):
     made_date = db.Column(db.Date, nullable=False) #'mm-dd-yy'
     description = db.Column(db.String, nullable=True)
     jar_status = db.Column(db.String(20), nullable=True)
-    # img = db.Column(db.String(20), nullable=True, default='default.jpg')
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     
@@ -51,7 +49,6 @@ class Share(db.Model):
 
     def __repr__(self):
         return f"""<Share share_id={self.share_id} share_name={self.share_name} made_date={self.made_date} jar_status={self.jar_status}>"""
-
 
 
 class Review(db.Model):
@@ -73,29 +70,7 @@ class Review(db.Model):
         return f'<Review review_id={self.review_id} reviewer_id={self.reviewer_id} maker_id={self.maker_id}>'        
 
 
-
-# class Photo(db.Model):
-#     """ A Photo Table """
-
-#     __tablename__ = 'photos'
-
-#     photo_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-#     post_date = db.Column(db.DateTime, nullable=False)
-#     # img = db.Column(db.String(20), nullable=False, default='default.jpg')
-
-#     recipe_id = db.Column(db.Integer, db.ForeignKey('recipes.recipe_id'), nullable=False)
-#     share_id = db.Column(db.Integer, db.ForeignKey('shares.share_id'), nullable=False)
-
-#     recipe = db.relationship('Recipe', foreign_keys=[recipe_id])
-#     share = db.relationship('Share', foreign_keys=[share_id])
-
-#     def __repr__(self):
-#         return f'<Photo photo_id={self.photo_id} post_date={self.post_date}>'
-
-
-
-######### Connect db to app -> server.py #########
-
+### Connect db to app -> server.py ###
 def connect_to_db(app, db_uri='postgresql:///kimchies', echo=True):
     app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
     app.config['SQLALCHEMY_ECHO'] = echo
@@ -110,21 +85,5 @@ def connect_to_db(app, db_uri='postgresql:///kimchies', echo=True):
 if __name__ == '__main__':
     from server import app
 
-    # Call connect_to_db(app, echo=False) if your program output gets
-    # too annoying; this will tell SQLAlchemy not to print out every query it executes.
-
     connect_to_db(app, echo=False)
     # db.create_all()
-
-    # new_user = User(nickname='testkim', email='bk@gmail.com', password='password', zipcode=12345)
-    # db.session.add(new_user)
-    # db.session.commit()
-    
-    # new_share = Share(share_name='radish', made_date='05-23-20', jar_status='fermenting', user_id='1')
-    # db.session.add(new_share)
-    # db.session.commit()
-
-    # new_review = Review(rating=8, review_date='03-28-20', comment='it was really tasty!', user_id='1', share_id='1') 
-    # db.session.add(new_review)
-    # db.session.commit()
-    

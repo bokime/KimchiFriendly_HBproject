@@ -2,7 +2,7 @@
 import os
 import crud
 
-from flask import Flask, render_template, redirect, request, flash, session, url_for, jsonify
+from flask import Flask, render_template, redirect, request, flash, session, url_for
 from model import connect_to_db
 from forms import Registration, Login, UpdateAccount, NewShare, Review
 from flask_bcrypt import Bcrypt
@@ -30,34 +30,30 @@ twilio_number = os.environ['TEST_NUMBER']
 
 @login_manager.user_loader
 def load_user(user_id):
-    """login manager to check current user"""
+    """ Login manager to check current user """
 
     return User.query.get(int(user_id))
-
 
 
 @app.route('/')
 @app.route('/home')
 def home():
     """ Home page showing posted jar shares """
-
-    page = request.args.get('page', 1, type=int) #defalt page is 1 
     # pagination obj set up
+    page = request.args.get('page', 1, type=int) #defalt page is 1 
     shares = Share.query.order_by(Share.made_date.desc()).paginate(page=page, per_page=3) 
         
     return render_template('home.html', shares=shares, title='Welcome')
 
 
-
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    """register new user"""
-
+    """ Register new user.
+        user verification using Falsk WTForms, validate on submit """
     if current_user.is_authenticated:
         return redirect(url_for('home'))
 
     form = Registration()
-
     if form.validate_on_submit():
 
         pw_hash = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
@@ -79,10 +75,9 @@ def register():
     return render_template('register.html', title='Register', form=form)  
 
 
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    """ user login verification """
+    """ User login verification """
     
     if current_user.is_authenticated:
         flash(f"Let's make and share some Kimchi Jars, { current_user.nickname }!", "success")
@@ -92,7 +87,7 @@ def login():
     if form.validate_on_submit():
         # get user by email from data
         user = User.query.filter_by(email=form.email.data).first()
-
+        # set password hash algorithm for user protection
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             
@@ -104,22 +99,18 @@ def login():
     return render_template('login.html', title='Login', form=form) 
 
 
-
 @app.route('/logout')
 @login_required
 def logout():
-    """ user logout """
-
     logout_user()
     flash("See you next time", "warning")
     return redirect(url_for('home'))   
 
 
-
 @app.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
-    """ update user profile """
+    """ Update user profile """
 
     form = UpdateAccount()
     
@@ -143,11 +134,10 @@ def account():
     return render_template('account.html', title='Account', form=form)
 
 
-
 @app.route('/home', methods=['POST'])
 @login_required
 def share_zipcode(): 
-    """ show Kimchi shares in the user's input zipcode """
+    """ Allow user to check Kimchi shares in zipcode input """
     
     zipcode = request.form.get('zipcode')
     shares = crud.get_shares_by_zipcode(zipcode)
@@ -155,11 +145,10 @@ def share_zipcode():
     return render_template('share_zipcode.html', shares=shares, zipcode=zipcode)
 
 
-
 @app.route('/home/new', methods=['GET', 'POST'])
 @login_required
 def new_share():
-    """ create new kimchi jar share """
+    """ Create a new Kimchi jar share """
 
     form = NewShare()
 
@@ -180,22 +169,20 @@ def new_share():
     return render_template('new_share.html', title='New Jar Share', form=form, legend='New Share')
 
 
-
 @app.route('/home/<share_id>')
 @login_required
 def share(share_id):
-    """ show the detail of each Kimchi Jar Share """
+    """ Show the details of each Kimchi jar share """
 
     share = Share.query.get_or_404(share_id)
 
     return render_template('share.html', title=share.share_name, share=share)
 
 
-
 @app.route('/home/<share_id>/update', methods=['GET', 'POST'])
 @login_required
 def update_share(share_id):
-    """ update user's share posting """
+    """ Update user's posting """
 
     update_share = Share.query.get_or_404(share_id)
 
@@ -225,11 +212,10 @@ def update_share(share_id):
     return render_template('new_share.html', title='Update Jar Share', form=form, legend='Update Jar Share')
 
 
-
 @app.route('/home/<share_id>/delete', methods=['POST'])
 @login_required
 def delete_share(share_id):
-    """ delete user's share posting """
+    """ Delete user's posting """
 
     delete_share = Share.query.get(share_id)
 
@@ -245,11 +231,10 @@ def delete_share(share_id):
         return redirect(url_for('home'))
 
 
-
 @app.route('/user/<user_id>')
 @login_required
 def user_shares(user_id):
-    """ show the user's kimchi share history """
+    """ Show user's Kimchi share history """
 
     user = User.query.filter_by(user_id=user_id).first_or_404()
     shares = crud.get_shares_by_user_id(user_id)
@@ -257,11 +242,10 @@ def user_shares(user_id):
     return render_template('user_profile.html', shares=shares, user=user)   
 
 
-
 @app.route('/user/<user_id>', methods=['POST'])
 @login_required
 def user_review(user_id): 
-    """ add new Kimchi maker review """
+    """ Create a new review about the Kimchi maker """
 
     if request.method == 'POST':
 
@@ -281,7 +265,6 @@ def user_review(user_id):
     return redirect(f'/user/{user_id}')
 
 
-
 @app.route('/user/<review_id>/delete', methods=['POST'])
 @login_required
 def delete_review(review_id):
@@ -296,27 +279,26 @@ def delete_review(review_id):
     return redirect(url_for('user_shares', user_id=delete_review.maker_id))
 
 
-
 @app.route('/sms', methods=['GET'])
 def send_request():
     """ send message to request Kimchi jar share """
     
-    sender = current_user.nickname
+    requestor = current_user.nickname
     maker_id = request.args.get('maker_id')
     maker = crud.load_user(maker_id).nickname
     
-    sender_number = twilio_number
+    requestor_number = twilio_number
     maker_number = my_number
 
     client = Client(account_sid, auth_token)
     message = client.messages.create(
-                        body=f"Hi {maker}, {sender} is interested in your Kimchi jar! Care to share? If you'd like to share, text them back at {sender_number}.",
-                        from_=sender_number,
+                        body=f"Hi {maker}, {requestor} is interested in your Kimchi jar! Care to share? If you'd like to share, text them back at {requestor_number}.",
+                        from_=requestor_number,
                         to=maker_number
                         )
     print(message.sid)
-    return "success"
 
+    return "success"
 
 
 if __name__ == '__main__':

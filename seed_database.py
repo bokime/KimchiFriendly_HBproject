@@ -14,7 +14,6 @@ os.system('dropdb kimchies')
 os.system('createdb kimchies')
 
 model.connect_to_db(server.app)#, echo=False)
-
 model.db.create_all()
 
 
@@ -34,7 +33,6 @@ for user in user_data:
     crud.create_user(nickname, email, password, zipcode, intro)
 
 
-
 """ seed dummy jar share data """
 with open('data/shares.json') as f:
     share_data = json.loads(f.read())
@@ -48,7 +46,6 @@ for share in share_data:
     user_id = share['user_id'] 
 
     crud.create_share(share_name, made_date, description, jar_status, user_id)
-
 
 
 """ seed dummy review data """

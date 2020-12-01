@@ -18,8 +18,6 @@ def create_user(nickname, email, password, zipcode, intro):
     db.session.commit()
 
     return user
-### test example: user1=create_user('mars', 'mars@test.com', 'password', '12345', 'I like kimchi!') 
-# user2=create_user('jupiter', 'jupiter@test.com', 'password', '12345', 'I like kimchi!')   
 
 
 def create_share(share_name, made_date, description, jar_status, user_id):
@@ -34,7 +32,6 @@ def create_share(share_name, made_date, description, jar_status, user_id):
     db.session.commit()
 
     return share
-### test example: share1=create_share('napa cabbage kimchi', '05-23-19', 'very spicy and tangy! so good!', 'sold', '2')  
 
 
 def create_review(rating, review_date, comment, reviewer_id, maker_id):
@@ -52,7 +49,6 @@ def create_review(rating, review_date, comment, reviewer_id, maker_id):
     db.session.commit()
 
     return review
-# review1 = create_review('7', '11-18-20', 'it was great!', user3.user_id, user2.user_id)
 
 
 def load_user(user_id):
@@ -83,5 +79,4 @@ def get_shares_by_user_id(user_id):
 if __name__ == '__main__':
 
     from server import app
-
     connect_to_db(app, echo=False)

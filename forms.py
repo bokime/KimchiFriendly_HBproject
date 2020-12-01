@@ -63,5 +63,4 @@ class NewShare(FlaskForm):
     made_date = DateField('Date you made', format='%m-%d-%y')
     description = TextAreaField('About This Kimchi', validators=[DataRequired()])
     jar_status = SelectField('Status', choices= ['Fermenting','Ready for Sharing','Sold'])
-    # image = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])                                            
     submit = SubmitField('Submit')
