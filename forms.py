@@ -62,5 +62,5 @@ class NewShare(FlaskForm):
     share_name = StringField('Name of Kimchi Jar', validators=[DataRequired()])
     made_date = DateField('Date you made', format='%m-%d-%y')
     description = TextAreaField('About This Kimchi', validators=[DataRequired()])
-    jar_status = SelectField('Status', choices= ['Fermenting','Ready for Sharing','Sold'])
+    jar_status = SelectField('Status', choices= ['Fermenting','Ready for Sharing','Shared'])
     submit = SubmitField('Submit')

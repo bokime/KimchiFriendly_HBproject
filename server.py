@@ -94,7 +94,7 @@ def login():
             session['user_id']= user.user_id
             return redirect(url_for("home"))
         else:
-            flash("Invalid username or password", "danger")
+            flash("Invalid email or password", "danger")
 
     return render_template('login.html', title='Login', form=form) 
 
