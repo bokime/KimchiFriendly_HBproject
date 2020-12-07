@@ -288,7 +288,7 @@ def send_request():
     maker = crud.load_user(maker_id).nickname
     
     requestor_number = twilio_number
-    maker_number = my_number
+    maker_number = crud.load_user(maker_id).phone_number
 
     client = Client(account_sid, auth_token)
     message = client.messages.create(
