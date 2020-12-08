@@ -18,11 +18,11 @@
 ### Features
 
   - User registration, Login, Logout, Edit account.
-  - Zipcode search to find Kimchi makers in user's area.
+  - Zipcode search to find Kimchi makers in the user's area.
   - Send Request Kimchi jars via Twilio API.
   - Posting new Kimchi jar sharing, update, delete.
-  - Display history of Kimchi maker's jar postings.
-  - Leave review of Kimchi maker, delete. 
+  - Display the history of Kimchi maker's jar postings.
+  - Leave a review of Kimchi maker, delete. 
 
 ### Database
 
