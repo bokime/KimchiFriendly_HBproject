@@ -1,6 +1,6 @@
 # KimchiFriendly
 
-> KimchiFriendly is inspired by the traditional Kimchi sharing culture  in Korea; my grandmother used to make 100 cabbages per batch to > share with family and neighbors. Kimchi is not just a healthy and  tasty food, but also a part of creating our warm sharing culture. 
+> KimchiFriendly is inspired by the traditional Kimchi sharing culture  in Korea; my grandmother used to make 100 cabbages per batch to share with family and neighbors. Kimchi is not just a healthy and  tasty food, but also a part of creating our warm sharing culture. 
 
 ### Tech stack
 
