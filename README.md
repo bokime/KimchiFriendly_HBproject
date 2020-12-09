@@ -90,6 +90,7 @@ $ source secrets.sh
 ```sh
 createdb kimchies
 python3 model.py
+python3 seed_database.py
 ```
 
 - Run the app:
