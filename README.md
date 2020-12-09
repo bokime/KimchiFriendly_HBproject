@@ -17,7 +17,8 @@
 
 ### Features
 
-  - User registration, Login, Logout, Edit account.
+  - User's registration, Login, Logout, Edit account.
+  ![](https://github.com/bokime/KimchiFriendly_HBproject/blob/master/static/gifs/signin.gif)
   - Zipcode search to find Kimchi makers in the user's area.
   - Send Request Kimchi jars via Twilio API.
   - Posting new Kimchi jar sharing, update, delete.
