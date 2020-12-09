@@ -2,7 +2,7 @@
 
 > KimchiFriendly is inspired by the traditional Kimchi sharing culture  in Korea; my grandmother used to make 100 cabbages per batch to share with family and neighbors. Kimchi is not just a healthy and  tasty food, but also a part of creating our warm sharing culture. 
 
-### Tech stack
+## Tech stack
 
   - Python
   - Flask (WTForms, LoginManager)
@@ -15,7 +15,7 @@
   - CSS
   - Twilio API
 
-### Features
+## Features
 
   - User's registration, Login, Logout, Edit account.
 
@@ -38,15 +38,27 @@
   - Leave a review of Kimchi maker, delete. 
   
   ![](https://github.com/bokime/KimchiFriendly_HBproject/blob/master/static/gifs/review.gif)
+  
+## MVPs
 
-### Database
+- User registration and login. 
+- Update profile.
+- Display all Kimchi jar shares and show each user's share history.
+- Check each Jar Share details.
+- Create/edit/delete new jar shares.
+- Search zip code to navigate Kimchi Jar Shares in the user's area.
+- Filter Share status( ‘fermenting’, ‘ready to share’, 'shared') 
+- Users can request available Kimchi jar share. (Twilio API)
+- Leave a review/ delete for jar sharing experience on Maker's profile.
+
+## Database
 
 > Each unique User can create multiple Share and Review in one to many relationships as if we share our Kimchi with family and friends in real life. 
 
   ![](https://github.com/bokime/KimchiFriendly_HBproject/blob/master/static/img/KimchiFriendly_db.jpeg)
 
 
-### Installation
+## Installation
 
 - Install PostgreSQL
 
