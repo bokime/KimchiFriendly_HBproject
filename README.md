@@ -71,7 +71,7 @@ https://github.com/bokime/KimchiFriendly_HBproject.git
 
 ```sh
 $ virtualenv env
-$ source env/bib/active
+$ source env/bin/active
 ```
 
 - Install dependencies:
