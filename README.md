@@ -24,6 +24,7 @@
 
   - Zipcode search to find Kimchi makers in the user's area.
   - Send Request Kimchi jars via Twilio API.
+  - Display the history of Kimchi maker's jar postings.
   
   ![](https://github.com/bokime/KimchiFriendly_HBproject/blob/master/static/gifs/zipsearch.gif)
   
@@ -32,8 +33,6 @@
   
   ![](https://github.com/bokime/KimchiFriendly_HBproject/blob/master/static/gifs/posting.gif)
   
-  
-  - Display the history of Kimchi maker's jar postings.
   
   - Leave a review of Kimchi maker, delete. 
   
