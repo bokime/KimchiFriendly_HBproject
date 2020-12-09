@@ -43,5 +43,5 @@
 
 > Each unique User can create multiple Share and Review in one to many relationships as if we share our Kimchi with family and friends in real life. 
 
-  ![](https://github.com/bokime/KimchiFriendly_HBproject/blob/master/static/img/KimchiFriendly_db.jpeg =100)
+  ![](https://github.com/bokime/KimchiFriendly_HBproject/blob/master/static/img/KimchiFriendly_db.jpeg width=100)
 
