@@ -45,3 +45,44 @@
 
   ![](https://github.com/bokime/KimchiFriendly_HBproject/blob/master/static/img/KimchiFriendly_db.jpeg)
 
+
+### Installation
+
+- Install PostgreSQL
+
+- Clone KimchiFriendly repo:
+
+```sh
+https://github.com/bokime/KimchiFriendly_HBproject.git
+```
+- Create and activate a virtual environment in the project directory:
+
+```sh
+$ virtualenv env
+$ source env/bib/active
+```
+
+- Install dependencies:
+
+```sh
+pip install -r requirements.txt
+```
+
+- Save your API keys in a file called "secrets.sh":
+
+```sh
+$ source secrets.sh
+```
+
+- Set up the database:
+
+```sh
+createdb kimchies
+python3 model.py
+```
+
+- Run the app:
+
+```sh
+python3 server.py
+```
