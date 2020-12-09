@@ -21,12 +21,26 @@
 
   ![](https://github.com/bokime/KimchiFriendly_HBproject/blob/master/static/gifs/signin.gif)
 
+
   - Zipcode search to find Kimchi makers in the user's area.
   - Send Request Kimchi jars via Twilio API.
+  
+  ![](https://github.com/bokime/KimchiFriendly_HBproject/blob/master/static/gifs/zipsearch.gif)
+  
+  
   - Posting new Kimchi jar sharing, update, delete.
+  
+  ![](https://github.com/bokime/KimchiFriendly_HBproject/blob/master/static/gifs/posting.gif)
+  
+  
   - Display the history of Kimchi maker's jar postings.
+  
   - Leave a review of Kimchi maker, delete. 
+  
+  ![](https://github.com/bokime/KimchiFriendly_HBproject/blob/master/static/gifs/review.gif)
 
 ### Database
 
 > Each unique User can create multiple Share and Review in one to many relationships as if we share our Kimchi with family and friends in real life. 
+  ![](https://github.com/bokime/KimchiFriendly_HBproject/blob/master/static/img/KimchiFriendly_db.jpeg)
+
